@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "677861548520",
+    "firebase_url": "https://caregiver-abdf0.firebaseio.com",
+    "project_id": "caregiver-abdf0",
+    "storage_bucket": "caregiver-abdf0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677861548520:android:40f0c6acfec2abe5",
+        "android_client_info": {
+          "package_name": "com.caregiver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "677861548520-p7kpen8dpfid3c4ata2jp6f2psqv80gp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.caregiver",
+            "certificate_hash": "71a1984605bedef4507a7f8332e5d236d5faa3f7"
+          }
+        },
+        {
+          "client_id": "677861548520-o0f5jpmencnp3pga5m9e2no1lbpniaav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1IUX9aBsfrd02sjCgwm58Mkv2arDjrBo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "677861548520-o0f5jpmencnp3pga5m9e2no1lbpniaav.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
