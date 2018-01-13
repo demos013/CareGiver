@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.caregiver.Model.Elder;
+
 public class Register_Elder extends AppCompatActivity {
 
     @Override
@@ -21,6 +23,8 @@ public class Register_Elder extends AppCompatActivity {
         Intent intent = new Intent(Register_Elder.this,Update_Profile_Elder.class);
         EditText txttemp = findViewById(R.id.register_elder_name);
         String elder_name = txttemp.getText().toString();
+        Elder fdfdf =new Elder();
+        fdfdf.setAddress();
 
         startActivity(intent);
     }
@@ -32,4 +36,6 @@ public class Register_Elder extends AppCompatActivity {
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         return true;
     }
+
+
 }
