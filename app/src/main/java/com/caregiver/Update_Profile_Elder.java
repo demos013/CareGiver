@@ -14,12 +14,22 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ThemedSpinnerAdapter;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
@@ -29,6 +39,8 @@ public class Update_Profile_Elder extends AppCompatActivity {
 
     private String filePath;
     private int MY_CAMERA_REQUEST_CODE =100;
+    private ImageView img;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +107,7 @@ public class Update_Profile_Elder extends AppCompatActivity {
                 bmpPic.compress(Bitmap.CompressFormat.JPEG, 10, bmpFile);
                 bmpFile.flush();
                 bmpFile.close();
-                ImageView img = (ImageView) findViewById(R.id.update_profile_elder_display);
+                img = (ImageView) findViewById(R.id.update_profile_elder_display);
                 img.setImageBitmap(bmpPic);
             } catch (Exception e) {
                 Log.e("Log", "Error on saving file");
@@ -116,7 +128,7 @@ public class Update_Profile_Elder extends AppCompatActivity {
                 filePath ="file://"+imgDecodableString;
                 Bitmap bmpPic = BitmapFactory.decodeFile(imgDecodableString);
                 bmpPic = Bitmap.createScaledBitmap(bmpPic, 400, 600, true);
-                ImageView img = (ImageView) findViewById(R.id.update_profile_elder_display);
+                img = (ImageView) findViewById(R.id.update_profile_elder_display);
                 img.setImageBitmap(bmpPic);
             }catch  (Exception e) {
                 Log.e("Log", "Error on saving file");
@@ -126,6 +138,29 @@ public class Update_Profile_Elder extends AppCompatActivity {
 
     public void updateDisplay(View view){
 
+        // Get the data from an ImageView as bytes
+        img.setDrawingCacheEnabled(true);
+        img.buildDrawingCache();
+        Bitmap bitmap = img.getDrawingCache();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] data = baos.toByteArray();
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference imageRef = storageRef.child("display/firebase.png");
+
+        UploadTask mUploadTask = imageRef.putBytes(data);
+        mUploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Log.d("failed", "onFailure: ");
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                Log.d("success", "onSuccess: ");
+            }
+        });
     }
 
 }

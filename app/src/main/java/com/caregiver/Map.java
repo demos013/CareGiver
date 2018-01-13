@@ -1,10 +1,19 @@
 package com.caregiver;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import com.caregiver.CustomListview.navigationlistview;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,6 +23,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
+    private String[] mDrawerTitle = {"Add Name","Home","Hidden", "My Buddy", "Buddy Requests", "Sign out"};
+    private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +42,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
+                    setupNavigationBar();
 
                 } else {
                     startActivity(new Intent(Map.this,Authentication.class));
@@ -61,4 +74,62 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
+    public void setupNavigationBar(){
+        //navigationbar
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ListView mListView = (ListView) findViewById(R.id.drawer);
+        navigationlistview adapter = new navigationlistview(this,mDrawerTitle);
+        mListView.setAdapter(adapter);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
+
+
+            }
+        });
+
+
+        //toggle
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Care Giver</font>"));
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,   // Context
+                mDrawerLayout,  // DrawerLayout
+                R.drawable.ic_drawer, // รูปภาพที่จะใช้
+                R.string.drawer_open // ค่า String ในไฟล์ strings.xml
+
+        ) {
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                invalidateOptionsMenu();
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu();
+            }
+        };
+        mDrawerToggle.setDrawerIndicatorEnabled(false);
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(),   R.drawable.ic_drawer, this.getTheme());
+
+        mDrawerToggle.setHomeAsUpIndicator(drawable);
+
+      /*  Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawer, getTheme());
+        mDrawerToggle.setHomeAsUpIndicator(drawable);*/
+
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
