@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.caregiver.Update_Profile_Elder"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:id="@+id/update_profile_elder_display"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
+        app:srcCompat="@drawable/man" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ถ่ายรูปเพื่อเลือกเป็นรูปประจำตัว"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMain"
+        android:onClick="selectDisplayBySelfie"/>
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="เลือกรูปประจำตัวจากคลังภาพ"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMain"
+        android:onClick="selectDisplayByGallery"/>
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ต่อไป"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMain"
+        android:onClick="updateDisplay"/>
+</LinearLayout>

@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -14,8 +15,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:windowSoftInputMode="adjustResize"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="adjustResize">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC5sBtXIAn7blCVKpYpHm_822DamagwU4s" />
@@ -30,7 +31,8 @@
         <activity android:name=".Signup_by_phone" />
         <activity android:name=".Map" />
         <activity android:name=".Signup_Select" />
-        <activity android:name=".Register_Elder"></activity>
+        <activity android:name=".Register_Elder" />
+        <activity android:name=".Update_Profile_Elder"></activity>
     </application>
 
 </manifest>
