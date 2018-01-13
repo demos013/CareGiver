@@ -10,7 +10,7 @@ public class Elder {
     private String photo_path;
     private String name;
     private String lastname;
-    private String citizend_id;
+    private String citizen_id;
     private String date_of_birth;
     private String address;
     private String telephone;
@@ -21,12 +21,12 @@ public class Elder {
     private String relation_elder;
     private String relative_mobile_number;
 
-    public Elder(String mobile_number, String uid,  String name, String lastname, String citizend_id, String date_of_birth, String address, String telephone, String drug_allergy, String blood_group, String relative_name, String relative_lastname, String relation_elder, String relative_mobile_number) {
+    public Elder(String mobile_number, String uid, String name, String lastname, String citizen_id, String date_of_birth, String address, String telephone, String drug_allergy, String blood_group, String relative_name, String relative_lastname, String relation_elder, String relative_mobile_number) {
         this.mobile_number = mobile_number;
         this.uid = uid;
         this.name = name;
         this.lastname = lastname;
-        this.citizend_id = citizend_id;
+        this.citizen_id = citizen_id;
         this.date_of_birth = date_of_birth;
         this.address = address;
         this.telephone = telephone;
@@ -81,12 +81,12 @@ public class Elder {
         this.lastname = lastname;
     }
 
-    public String getCitizend_id() {
-        return citizend_id;
+    public String getCitizen_id() {
+        return citizen_id;
     }
 
-    public void setCitizend_id(String citizend_id) {
-        this.citizend_id = citizend_id;
+    public void setCitizen_id(String citizen_id) {
+        this.citizen_id = citizen_id;
     }
 
     public String getDate_of_birth() {
