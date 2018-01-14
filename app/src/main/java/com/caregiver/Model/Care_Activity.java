@@ -12,13 +12,13 @@ public class Care_Activity {
     private String start_date;
     private String start_time;
     private String finish_time;
-    private String finish_check;
+    private Boolean finish_check;
     private String activity_detail;
 
     public Care_Activity() {
     }
 
-    public Care_Activity(String elder_uid, String caregiver_uid, String start_key, String confirm_key, String start_date, String start_time, String finish_time, String finish_check, String activity_detail) {
+    public Care_Activity(String elder_uid, String caregiver_uid, String start_key, String confirm_key, String start_date, String start_time, String finish_time, Boolean finish_check, String activity_detail) {
         this.elder_uid = elder_uid;
         this.caregiver_uid = caregiver_uid;
         this.start_key = start_key;
@@ -86,11 +86,11 @@ public class Care_Activity {
         this.finish_time = finish_time;
     }
 
-    public String getFinish_check() {
+    public Boolean getFinish_check() {
         return finish_check;
     }
 
-    public void setFinish_check(String finish_check) {
+    public void setFinish_check(Boolean finish_check) {
         this.finish_check = finish_check;
     }
 

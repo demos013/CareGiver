@@ -12,6 +12,7 @@ public class Elder {
     private String lastname;
     private String citizen_id;
     private String date_of_birth;
+    private String job;
     private String address;
     private String telephone;
     private String drug_allergy;
@@ -21,13 +22,18 @@ public class Elder {
     private String relation_elder;
     private String relative_mobile_number;
 
-    public Elder(String mobile_number, String uid, String name, String lastname, String citizen_id, String date_of_birth, String address, String telephone, String drug_allergy, String blood_group, String relative_name, String relative_lastname, String relation_elder, String relative_mobile_number) {
+    public Elder() {
+    }
+
+    public Elder(String mobile_number, String uid, String photo_path, String name, String lastname, String citizen_id, String date_of_birth, String job, String address, String telephone, String drug_allergy, String blood_group, String relative_name, String relative_lastname, String relation_elder, String relative_mobile_number) {
         this.mobile_number = mobile_number;
         this.uid = uid;
+        this.photo_path = photo_path;
         this.name = name;
         this.lastname = lastname;
         this.citizen_id = citizen_id;
         this.date_of_birth = date_of_birth;
+        this.job = job;
         this.address = address;
         this.telephone = telephone;
         this.drug_allergy = drug_allergy;
@@ -36,9 +42,6 @@ public class Elder {
         this.relative_lastname = relative_lastname;
         this.relation_elder = relation_elder;
         this.relative_mobile_number = relative_mobile_number;
-    }
-
-    public Elder() {
     }
 
     public String getMobile_number() {
@@ -95,6 +98,14 @@ public class Elder {
 
     public void setDate_of_birth(String date_of_birth) {
         this.date_of_birth = date_of_birth;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
     }
 
     public String getAddress() {
