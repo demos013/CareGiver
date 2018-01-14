@@ -36,7 +36,7 @@ public class Register_Elder extends AppCompatActivity {
         edttemp = findViewById(R.id.register_elder_lastname);
         elderDB.setLastname(edttemp.getText().toString());
         edttemp = findViewById(R.id.register_elder_citizen_id);
-        elderDB.setCitizend_id(edttemp.getText().toString());
+        elderDB.setCitizen_id(edttemp.getText().toString());
         edttemp = findViewById(R.id.register_elder_date_of_birth);
         elderDB.setDate_of_birth(edttemp.getText().toString());
         edttemp = findViewById(R.id.register_elder_job);

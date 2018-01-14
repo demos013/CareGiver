@@ -4,16 +4,19 @@ package com.caregiver.Model;
  * Created by Demos on 1/14/2018.
  */
 
-public class Affiliation {
-    private String affilation_id;
+public class Care_Center {
+    private String care_center_id;
     private String name;
     private String address;
     private String detail;
     private String photo_path;
     private String telephone;
 
-    public Affiliation(String affilation_id, String name, String address, String detail, String photo_path, String telephone) {
-        this.affilation_id = affilation_id;
+    public Care_Center() {
+    }
+
+    public Care_Center(String care_center_id, String name, String address, String detail, String photo_path, String telephone) {
+        this.care_center_id = care_center_id;
         this.name = name;
         this.address = address;
         this.detail = detail;
@@ -21,15 +24,12 @@ public class Affiliation {
         this.telephone = telephone;
     }
 
-    public Affiliation() {
+    public String getCare_center_id() {
+        return care_center_id;
     }
 
-    public String getAffilation_id() {
-        return affilation_id;
-    }
-
-    public void setAffilation_id(String affilation_id) {
-        this.affilation_id = affilation_id;
+    public void setCare_center_id(String care_center_id) {
+        this.care_center_id = care_center_id;
     }
 
     public String getName() {

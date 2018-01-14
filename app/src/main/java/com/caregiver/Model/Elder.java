@@ -12,9 +12,9 @@ public class Elder implements Serializable{
     private String photo_path;
     private String name;
     private String lastname;
-    private String citizend_id;
-    private String job;
+    private String citizen_id;
     private String date_of_birth;
+    private String job;
     private String address;
     private String telephone;
     private String drug_allergy;
@@ -24,12 +24,15 @@ public class Elder implements Serializable{
     private String relation_elder;
     private String relative_mobile_number;
 
-    public Elder(String mobile_number, String uid,  String name, String lastname, String citizend_id, String date_of_birth, String job, String address, String telephone, String drug_allergy, String blood_group, String relative_name, String relative_lastname, String relation_elder, String relative_mobile_number) {
+
+
+    public Elder(String mobile_number, String uid, String photo_path, String name, String lastname, String citizen_id, String date_of_birth, String job, String address, String telephone, String drug_allergy, String blood_group, String relative_name, String relative_lastname, String relation_elder, String relative_mobile_number) {
         this.mobile_number = mobile_number;
         this.uid = uid;
+        this.photo_path = photo_path;
         this.name = name;
         this.lastname = lastname;
-        this.citizend_id = citizend_id;
+        this.citizen_id = citizen_id;
         this.date_of_birth = date_of_birth;
         this.job = job;
         this.address = address;
@@ -42,12 +45,13 @@ public class Elder implements Serializable{
         this.relative_mobile_number = relative_mobile_number;
     }
 
+
     public Elder() {
         this.mobile_number = "null";
         this.uid = "null";
         this.name = "null";
         this.lastname = "null";
-        this.citizend_id = "null";
+        this.citizen_id = "null";
         this.date_of_birth = "null";
         this.job = "null";
         this.address = "null";
@@ -102,12 +106,12 @@ public class Elder implements Serializable{
         this.lastname = lastname;
     }
 
-    public String getCitizend_id() {
-        return citizend_id;
+    public String getCitizen_id() {
+        return citizen_id;
     }
 
-    public void setCitizend_id(String citizend_id) {
-        this.citizend_id = citizend_id;
+    public void setCitizen_id(String citizen_id) {
+        this.citizen_id = citizen_id;
     }
 
     public String getDate_of_birth() {
