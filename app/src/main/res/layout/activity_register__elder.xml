@@ -81,7 +81,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/editTexregister_elder_address"
+                android:id="@+id/register_elder_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"

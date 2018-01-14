@@ -22,9 +22,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.caregiver.Model.Elder;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -40,12 +43,14 @@ public class Update_Profile_Elder extends AppCompatActivity {
     private String filePath;
     private int MY_CAMERA_REQUEST_CODE =100;
     private ImageView img;
+    private Elder elderDB;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update__profile__elder);
+        elderDB = (Elder) getIntent().getSerializableExtra("elderDB");
 
         // Permission StrictMode
         if (Build.VERSION.SDK_INT > 9) {
@@ -146,7 +151,7 @@ public class Update_Profile_Elder extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] data = baos.toByteArray();
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference imageRef = storageRef.child("display/firebase.png");
+        StorageReference imageRef = storageRef.child("display/"+elderDB.getUid()+".png");
 
         UploadTask mUploadTask = imageRef.putBytes(data);
         mUploadTask.addOnFailureListener(new OnFailureListener() {
@@ -158,6 +163,14 @@ public class Update_Profile_Elder extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                elderDB.setPhoto_path(taskSnapshot.getDownloadUrl().toString());
+                DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference mUsersRef = mRootRef.child("Elder");
+                mUsersRef.child(elderDB.getUid()).setValue(elderDB);
+                Intent intent = new Intent(Update_Profile_Elder.this,Map.class);
+                intent.putExtra("elderDB",elderDB);
+                startActivity(intent);
+
                 Log.d("success", "onSuccess: ");
             }
         });

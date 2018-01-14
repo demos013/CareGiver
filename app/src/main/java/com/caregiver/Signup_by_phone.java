@@ -125,7 +125,11 @@ public class Signup_by_phone extends AppCompatActivity {
                             Log.d("success", "signInWithCredential:success");
                             FirebaseUser user = task.getResult().getUser();
                             if(isElder){
-                                startActivity(new Intent(Signup_by_phone.this,Register_Elder.class));
+                                Intent intent = new Intent(Signup_by_phone.this , Register_Elder.class);
+                                intent.putExtra("elder_id",user.getUid());
+                                intent.putExtra("elder_mobile_number",user.getPhoneNumber());
+                                startActivity(intent);
+
                             }
                             else{
                             }

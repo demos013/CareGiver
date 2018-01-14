@@ -1,9 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.caregiver.Register_Caregiver">
+    tools:context="com.caregiver.Register_Caregiver"
+    android:orientation="vertical"
+    android:gravity="center">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+            android:text="สมัครสมาชิกเป็นผู้ป่วย"
+            android:textSize="@dimen/font_medium" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:fillViewport="true"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/register_elder_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="ชื่อ"
+                android:inputType="textPersonName"
+                android:textSize="@dimen/font_small" />
+
+            <EditText
+                android:id="@+id/register_elder_lastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="นามสกุล"
+                android:inputType="textPersonName"
+                android:textSize="@dimen/font_small" />
+
+            <EditText
+                android:id="@+id/register_elder_citizen_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="เลขบัตรประจำตัวประชาชน"
+                android:inputType="textPersonName"
+                android:textSize="@dimen/font_small" />
+
+            <EditText
+                android:id="@+id/register_elder_date_of_birth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="วันเดือนปีเกิด"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_elder_job"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="อาชีพ"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/editTexregister_elder_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="ที่อยู่"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_elder_telephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="เบอร์โทรศัพทร์บ้าน"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_elder_drug_allergy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="ยาที่แพ้"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_elder_blood_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="หมู่โลหิต"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_elder_relative_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="ชื่อของบุคคลใกล้ชิด"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_elder_relative_lastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="นามสกุลของบุคคลใกล้ชิด"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_elder_relative_telephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="เบอร์โทรศัพทร์ของบุคคลใกล้ชิด"
+                android:inputType="textPersonName" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMain"
+        android:gravity="center"
+        android:onClick="onClickRegisterElder"
+        android:text="สมัครสมาชิก"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium" />
+</LinearLayout>

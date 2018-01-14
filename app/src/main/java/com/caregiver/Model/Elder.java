@@ -1,16 +1,19 @@
 package com.caregiver.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by Demos on 1/13/2018.
  */
 
-public class Elder {
+public class Elder implements Serializable{
     private String mobile_number;
     private String uid;
     private String photo_path;
     private String name;
     private String lastname;
     private String citizend_id;
+    private String job;
     private String date_of_birth;
     private String address;
     private String telephone;
@@ -21,13 +24,14 @@ public class Elder {
     private String relation_elder;
     private String relative_mobile_number;
 
-    public Elder(String mobile_number, String uid,  String name, String lastname, String citizend_id, String date_of_birth, String address, String telephone, String drug_allergy, String blood_group, String relative_name, String relative_lastname, String relation_elder, String relative_mobile_number) {
+    public Elder(String mobile_number, String uid,  String name, String lastname, String citizend_id, String date_of_birth, String job, String address, String telephone, String drug_allergy, String blood_group, String relative_name, String relative_lastname, String relation_elder, String relative_mobile_number) {
         this.mobile_number = mobile_number;
         this.uid = uid;
         this.name = name;
         this.lastname = lastname;
         this.citizend_id = citizend_id;
         this.date_of_birth = date_of_birth;
+        this.job = job;
         this.address = address;
         this.telephone = telephone;
         this.drug_allergy = drug_allergy;
@@ -39,6 +43,23 @@ public class Elder {
     }
 
     public Elder() {
+        this.mobile_number = "null";
+        this.uid = "null";
+        this.name = "null";
+        this.lastname = "null";
+        this.citizend_id = "null";
+        this.date_of_birth = "null";
+        this.job = "null";
+        this.address = "null";
+        this.telephone = "null";
+        this.drug_allergy = "null";
+        this.blood_group = "null";
+        this.relative_name = "null";
+        this.relative_lastname = "null";
+        this.relation_elder = "null";
+        this.relative_mobile_number = "null";
+        this.photo_path = "null";
+        this.relation_elder = "null";
     }
 
     public String getMobile_number() {
@@ -95,6 +116,14 @@ public class Elder {
 
     public void setDate_of_birth(String date_of_birth) {
         this.date_of_birth = date_of_birth;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
     }
 
     public String getAddress() {

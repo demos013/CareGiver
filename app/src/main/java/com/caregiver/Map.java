@@ -3,11 +3,13 @@ package com.caregiver;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -77,7 +79,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
     public void setupNavigationBar(){
         //navigationbar
-        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ListView mListView = (ListView) findViewById(R.id.drawer);
         navigationlistview adapter = new navigationlistview(this,mDrawerTitle);
         mListView.setAdapter(adapter);
@@ -95,7 +97,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Care Giver</font>"));
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        //getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Care Giver</font>"));
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,   // Context
                 mDrawerLayout,  // DrawerLayout
@@ -110,16 +114,10 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                Log.d("open", "onDrawerOpened: ");
                 invalidateOptionsMenu();
             }
         };
-        mDrawerToggle.setDrawerIndicatorEnabled(false);
-        Drawable drawable = ResourcesCompat.getDrawable(getResources(),   R.drawable.ic_drawer, this.getTheme());
-
-        mDrawerToggle.setHomeAsUpIndicator(drawable);
-
-      /*  Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawer, getTheme());
-        mDrawerToggle.setHomeAsUpIndicator(drawable);*/
 
         mDrawerLayout.addDrawerListener(mDrawerToggle);
     }
@@ -127,6 +125,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
+
             return true;
         }
         return super.onOptionsItemSelected(item);
