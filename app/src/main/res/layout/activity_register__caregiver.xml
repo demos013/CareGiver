@@ -1,9 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.caregiver.Register_Caregiver">
+    tools:context="com.caregiver.Register_Elder"
+    android:orientation="vertical"
+    android:gravity="center">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/register_caregiver_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+            android:text="@string/be_a_care_giver"
+            android:textSize="@dimen/font_medium" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/register_caregiver_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/name"
+                android:inputType="textPersonName"
+                android:textSize="@dimen/font_small" />
+
+            <EditText
+                android:id="@+id/register_caregiver_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/last_name"
+                android:inputType="textPersonName"
+                android:textSize="@dimen/font_small" />
+
+            <EditText
+                android:id="@+id/register_caregiver_citizen_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/citizen_id"
+                android:inputType="textPersonName"
+                android:textSize="@dimen/font_small" />
+
+            <EditText
+                android:id="@+id/register_caregiver_date_of_birth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/date_of_birth"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_caregiver_job"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/job"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_caregiver_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/address"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_caregiver_telephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/telephone"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_caregiver_drug_allergy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/drug_allergy"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_caregiver_blood_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/blood_group"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_caregiver_relative_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/relative_name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_caregiver_relative_lastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/relative_last_name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_caregiver_relative_telephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/relative_telephone"
+                android:inputType="textPersonName" />
+
+        </LinearLayout>
+    </ScrollView>
+    <Button
+        android:id="@+id/register_caregiver_button_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        android:gravity="center"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMain"
+        android:onClick="onClickRegisterElder" />
+</LinearLayout>

@@ -9,9 +9,10 @@
     android:gravity="center">
 
     <Button
+        android:id="@+id/sign_up_select_button_be_an_elder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="สมัครสมาชิกเป็นผู้ป่วย"
+        android:text="@string/be_an_elder"
         android:layout_marginBottom="40px"
         android:textSize="@dimen/font_medium"
         android:textColor="@color/White"
@@ -19,11 +20,11 @@
         android:onClick="onClickElder"/>
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/sign_up_select_button_be_a_care_giver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorMain"
-        android:text="สมัครสมาชิกเป็นผู้ดูแล"
+        android:text="@string/be_a_care_giver"
         android:textColor="@color/White"
         android:textSize="@dimen/font_medium"
         android:onClick="onClickCareGiver"/>

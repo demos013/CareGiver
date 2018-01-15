@@ -15,25 +15,23 @@
         android:layout_marginBottom="60px">
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/sign_up_by_phone_telephone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="กรอกเบอร์โทรศัพทร์มือถือ"
+            android:hint="@string/insert_phone_number"
             android:inputType="phone"
             android:text="+66643122710" />
 
         <Button
-            android:id="@+id/sendcodebtn"
+            android:id="@+id/sign_up_by_phone_button_get_otp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorMain"
             android:onClick="onSubmit"
-            android:text="รับรหัสผ่าน OTP"
+            android:text="@string/get_otp"
             android:textColor="@color/White"
             android:textSize="@dimen/font_medium" />
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -44,11 +42,11 @@
         android:layout_marginTop="60px">
 
         <com.chaos.view.PinView
-            android:id="@+id/pinView"
+            android:id="@+id/sign_up_by_phone_pin_OTP"
             style="@style/PinWidget.PinView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Hint."
+            android:hint=""
             android:inputType="number"
             android:padding="5dp"
             android:textColor="@color/colorPrimaryDark"
@@ -63,11 +61,11 @@
             app:viewType="rectangle" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/sign_up_by_phone_button_confirm_otp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="verify"
-            android:text="ยืนยันรหัสผ่าน OTP"
+            android:text="@string/confirm_otp"
             android:textSize="@dimen/font_medium"
             android:textColor="@color/White"
             android:background="@color/colorMain"/>

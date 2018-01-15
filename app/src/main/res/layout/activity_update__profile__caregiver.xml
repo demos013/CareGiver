@@ -1,9 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.caregiver.Update_Profile_Caregiver">
+    tools:context="com.caregiver.Update_Profile_Elder"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/update_profile_care_giver_display"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
+        app:srcCompat="@mipmap/ic_nurse" />
+
+    <Button
+        android:id="@+id/update_profile_care_giver_button_take_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/take_photo_by_camera"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMain"
+        android:onClick="selectDisplayBySelfie"/>
+
+    <Button
+        android:id="@+id/update_profile_care_giver_button_choose_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_photo_from_gallery"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMain"
+        android:onClick="selectDisplayByGallery"/>
+
+    <Button
+        android:id="@+id/update_profile_care_giver_button_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/next"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMain"
+        android:onClick="updateDisplay"/>
+</LinearLayout>

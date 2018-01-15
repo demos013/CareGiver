@@ -15,26 +15,22 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/register_elder_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:gravity="center"
-            android:text="สมัครสมาชิกเป็นผู้ป่วย"
+            android:text="@string/be_an_elder"
             android:textSize="@dimen/font_medium" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:fillViewport="true"
-
-        >
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:orientation="vertical">
 
             <EditText
@@ -42,16 +38,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="ชื่อ"
+                android:hint="@string/name"
                 android:inputType="textPersonName"
                 android:textSize="@dimen/font_small" />
 
             <EditText
-                android:id="@+id/register_elder_lastname"
+                android:id="@+id/register_elder_last_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="นามสกุล"
+                android:hint="@string/last_name"
                 android:inputType="textPersonName"
                 android:textSize="@dimen/font_small" />
 
@@ -60,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="เลขบัตรประจำตัวประชาชน"
+                android:hint="@string/citizen_id"
                 android:inputType="textPersonName"
                 android:textSize="@dimen/font_small" />
 
@@ -69,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="วันเดือนปีเกิด"
+                android:hint="@string/date_of_birth"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -77,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="อาชีพ"
+                android:hint="@string/job"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -85,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="ที่อยู่"
+                android:hint="@string/address"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -93,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="เบอร์โทรศัพทร์บ้าน"
+                android:hint="@string/telephone"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -101,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="ยาที่แพ้"
+                android:hint="@string/drug_allergy"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -109,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="หมู่โลหิต"
+                android:hint="@string/blood_group"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -117,7 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="ชื่อของบุคคลใกล้ชิด"
+                android:hint="@string/relative_name"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -125,7 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="นามสกุลของบุคคลใกล้ชิด"
+                android:hint="@string/relative_last_name"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -133,24 +129,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="เบอร์โทรศัพทร์ของบุคคลใกล้ชิด"
+                android:hint="@string/relative_telephone"
                 android:inputType="textPersonName" />
-
         </LinearLayout>
-
     </ScrollView>
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/register_elder_button_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="สมัครสมาชิก"
+        android:text="@string/sign_up"
         android:gravity="center"
         android:textColor="@color/White"
         android:textSize="@dimen/font_medium"
         android:layout_marginTop="20dp"
         android:background="@color/colorMain"
-        android:onClick="onClickRegisterElder"
-        />
-
+        android:onClick="onClickRegisterElder" />
 </LinearLayout>

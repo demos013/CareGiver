@@ -16,10 +16,10 @@
         app:srcCompat="@drawable/man" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/update_profile_elder_button_take_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ถ่ายรูปเพื่อเลือกเป็นรูปประจำตัว"
+        android:text="@string/take_photo_by_camera"
         android:textColor="@color/White"
         android:textSize="@dimen/font_medium"
         android:layout_marginTop="20dp"
@@ -27,10 +27,10 @@
         android:onClick="selectDisplayBySelfie"/>
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/update_profile_elder_button_choose_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="เลือกรูปประจำตัวจากคลังภาพ"
+        android:text="@string/choose_photo_from_gallery"
         android:textColor="@color/White"
         android:textSize="@dimen/font_medium"
         android:layout_marginTop="20dp"
@@ -38,10 +38,10 @@
         android:onClick="selectDisplayByGallery"/>
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/update_profile_elder_button_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ต่อไป"
+        android:text="@string/next"
         android:textColor="@color/White"
         android:textSize="@dimen/font_medium"
         android:layout_marginTop="20dp"
