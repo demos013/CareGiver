@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.caregiver.Register_Caregiver"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center_horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,13 +20,13 @@
             android:layout_height="wrap_content"
 
             android:gravity="center"
-            android:text="สมัครสมาชิกเป็นผู้ป่วย"
+            android:text="สมัครสมาชิกเป็นผู้ดูแล"
             android:textSize="@dimen/font_medium" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="wrap_content"
         android:fillViewport="true"
 
         >
@@ -38,7 +38,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/register_elder_name"
+                android:id="@+id/register_caregiver_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -47,7 +47,7 @@
                 android:textSize="@dimen/font_small" />
 
             <EditText
-                android:id="@+id/register_elder_lastname"
+                android:id="@+id/register_caregiver_lastname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -56,7 +56,7 @@
                 android:textSize="@dimen/font_small" />
 
             <EditText
-                android:id="@+id/register_elder_citizen_id"
+                android:id="@+id/register_caregiver_citizen_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -65,7 +65,7 @@
                 android:textSize="@dimen/font_small" />
 
             <EditText
-                android:id="@+id/register_elder_date_of_birth"
+                android:id="@+id/register_caregiver_date_of_birth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -73,15 +73,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/register_elder_job"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="อาชีพ"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/editTexregister_elder_address"
+                android:id="@+id/register_caregiver_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -89,7 +81,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/register_elder_telephone"
+                android:id="@+id/register_caregiver_telephone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -97,43 +89,19 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/register_elder_drug_allergy"
+                android:id="@+id/register_caregiver_specialization"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="ยาที่แพ้"
+                android:hint="ความถนัดเฉพาะ"
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/register_elder_blood_group"
+                android:id="@+id/register_caregiver_carecenter_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="หมู่โลหิต"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/register_elder_relative_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="ชื่อของบุคคลใกล้ชิด"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/register_elder_relative_lastname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="นามสกุลของบุคคลใกล้ชิด"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/register_elder_relative_telephone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="เบอร์โทรศัพทร์ของบุคคลใกล้ชิด"
+                android:hint="สังกัด"
                 android:inputType="textPersonName" />
 
         </LinearLayout>
@@ -147,7 +115,7 @@
         android:layout_marginTop="20dp"
         android:background="@color/colorMain"
         android:gravity="center"
-        android:onClick="onClickRegisterElder"
+        android:onClick="onClickRegisterCaregiver"
         android:text="สมัครสมาชิก"
         android:textColor="@color/White"
         android:textSize="@dimen/font_medium" />

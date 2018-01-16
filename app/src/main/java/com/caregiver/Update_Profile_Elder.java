@@ -151,7 +151,7 @@ public class Update_Profile_Elder extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] data = baos.toByteArray();
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference imageRef = storageRef.child("display/"+elderDB.getUid()+".png");
+        StorageReference imageRef = storageRef.child("display_elder/"+elderDB.getUid()+".png");
 
         UploadTask mUploadTask = imageRef.putBytes(data);
         mUploadTask.addOnFailureListener(new OnFailureListener() {

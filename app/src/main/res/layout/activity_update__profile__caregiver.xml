@@ -1,9 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.caregiver.Update_Profile_Caregiver">
+    tools:context="com.caregiver.Update_Profile_Caregiver"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/update_profile_caregiver_display"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
+        app:srcCompat="@drawable/man" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMain"
+        android:onClick="selectDisplayByGallery"
+        android:text="เลือกรูปประจำตัวจากคลังภาพ"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium" />
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMain"
+        android:onClick="selectDisplayBySelfie"
+        android:text="ถ่ายรูปเพื่อเลือกเป็นรูปประจำตัว"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium" />
+
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMain"
+        android:onClick="updateDisplay"
+        android:text="ต่อไป"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium" />
+</LinearLayout>

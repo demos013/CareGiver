@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toolbar;
 
 import com.caregiver.CustomListview.navigationlistview;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,6 +29,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
     private String[] mDrawerTitle = {"Add Name","Home","Hidden", "My Buddy", "Buddy Requests", "Sign out"};
     private ActionBarDrawerToggle mDrawerToggle;
+    private android.support.v7.widget.Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         ListView mListView = (ListView) findViewById(R.id.drawer);
         navigationlistview adapter = new navigationlistview(this,mDrawerTitle);
         mListView.setAdapter(adapter);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {

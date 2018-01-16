@@ -1,10 +1,12 @@
 package com.caregiver.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by Demos on 1/14/2018.
  */
 
-public class Caregiver {
+public class Caregiver  implements Serializable {
     private String mobile_number;
     private String uid;
     private String photo_path;
@@ -15,12 +17,23 @@ public class Caregiver {
     private String address;
     private String telephone;
     private String specialization;
-    private String care_center_id;
+    private String carecenter_id;
 
     public Caregiver() {
+        this.mobile_number = "null";
+        this.uid = "null";
+        this.photo_path = "null";
+        this.name = "null";
+        this.lastname = "null";
+        this.citizen_id = "null";
+        this.date_of_birth = "null";
+        this.address = "null";
+        this.telephone = "null";
+        this.specialization = "null";
+        this.carecenter_id = "null";
     }
 
-    public Caregiver(String mobile_number, String uid, String photo_path, String name, String lastname, String citizen_id, String date_of_birth, String address, String telephone, String specialization, String care_center_id) {
+    public Caregiver(String mobile_number, String uid, String photo_path, String name, String lastname, String citizen_id, String date_of_birth, String address, String telephone, String specialization, String carecenter_id) {
         this.mobile_number = mobile_number;
         this.uid = uid;
         this.photo_path = photo_path;
@@ -31,7 +44,7 @@ public class Caregiver {
         this.address = address;
         this.telephone = telephone;
         this.specialization = specialization;
-        this.care_center_id = care_center_id;
+        this.carecenter_id = carecenter_id;
     }
 
     public String getMobile_number() {
@@ -114,11 +127,11 @@ public class Caregiver {
         this.specialization = specialization;
     }
 
-    public String getCare_center_id() {
-        return care_center_id;
+    public String getCarecenter_id() {
+        return carecenter_id;
     }
 
-    public void setCare_center_id(String care_center_id) {
-        this.care_center_id = care_center_id;
+    public void setCarecenter_id(String care_center_id) {
+        this.carecenter_id = care_center_id;
     }
 }

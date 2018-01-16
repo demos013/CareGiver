@@ -132,6 +132,11 @@ public class Signup_by_phone extends AppCompatActivity {
 
                             }
                             else{
+                                Intent intent = new Intent(Signup_by_phone.this , Register_Caregiver.class);
+                                intent.putExtra("caregiver_id",user.getUid());
+                                intent.putExtra("caregiver_id_mobile_number",user.getPhoneNumber());
+                                startActivity(intent);
+
                             }
                         } else {
                             // Sign in failed, display a message and update the UI
