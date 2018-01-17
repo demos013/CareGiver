@@ -4,9 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     tools:context="com.caregiver.Register_Elder"
     android:orientation="vertical"
     android:gravity="center">
+=======
+    tools:context="com.caregiver.Register_Caregiver"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+>>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,23 +21,42 @@
         android:orientation="vertical">
 
         <TextView
+<<<<<<< HEAD
             android:id="@+id/register_caregiver_header"
+=======
+            android:id="@+id/textView"
+>>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:gravity="center"
+<<<<<<< HEAD
             android:text="@string/be_a_care_giver"
+=======
+            android:text="สมัครสมาชิกเป็นผู้ดูแล"
+>>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
             android:textSize="@dimen/font_medium" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="350dp"
         android:fillViewport="true">
+=======
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+
+        >
+>>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
+=======
+
+>>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
             android:orientation="vertical">
 
             <EditText
@@ -39,16 +64,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+<<<<<<< HEAD
                 android:hint="@string/name"
+=======
+                android:hint="ชื่อ"
+>>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
                 android:inputType="textPersonName"
                 android:textSize="@dimen/font_small" />
 
             <EditText
+<<<<<<< HEAD
                 android:id="@+id/register_caregiver_last_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/last_name"
+=======
+                android:id="@+id/register_caregiver_lastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="นามสกุล"
+>>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
                 android:inputType="textPersonName"
                 android:textSize="@dimen/font_small" />
 
@@ -57,7 +94,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+<<<<<<< HEAD
                 android:hint="@string/citizen_id"
+=======
+                android:hint="เลขบัตรประจำตัวประชาชน"
+>>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
                 android:inputType="textPersonName"
                 android:textSize="@dimen/font_small" />
 
@@ -66,6 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+<<<<<<< HEAD
                 android:hint="@string/date_of_birth"
                 android:inputType="textPersonName" />
 
@@ -75,6 +117,9 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/job"
+=======
+                android:hint="วันเดือนปีเกิด"
+>>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
                 android:inputType="textPersonName" />
 
             <EditText
@@ -82,7 +127,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+<<<<<<< HEAD
                 android:hint="@string/address"
+=======
+                android:hint="ที่อยู่"
+>>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
                 android:inputType="textPersonName" />
 
             <EditText
@@ -90,6 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+<<<<<<< HEAD
                 android:hint="@string/telephone"
                 android:inputType="textPersonName" />
 
@@ -146,4 +196,40 @@
         android:layout_marginTop="20dp"
         android:background="@color/colorMain"
         android:onClick="onClickRegisterElder" />
+=======
+                android:hint="เบอร์โทรศัพทร์บ้าน"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_caregiver_specialization"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="ความถนัดเฉพาะ"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/register_caregiver_carecenter_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="สังกัด"
+                android:inputType="textPersonName" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMain"
+        android:gravity="center"
+        android:onClick="onClickRegisterCaregiver"
+        android:text="สมัครสมาชิก"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium" />
+>>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
 </LinearLayout>

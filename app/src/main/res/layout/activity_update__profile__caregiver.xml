@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     tools:context="com.caregiver.Update_Profile_Elder"
     android:orientation="vertical"
     android:gravity="center_horizontal">
@@ -47,4 +48,48 @@
         android:layout_marginTop="20dp"
         android:background="@color/colorMain"
         android:onClick="updateDisplay"/>
+=======
+    tools:context="com.caregiver.Update_Profile_Caregiver"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/update_profile_caregiver_display"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
+        app:srcCompat="@drawable/man" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMain"
+        android:onClick="selectDisplayByGallery"
+        android:text="เลือกรูปประจำตัวจากคลังภาพ"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium" />
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMain"
+        android:onClick="selectDisplayBySelfie"
+        android:text="ถ่ายรูปเพื่อเลือกเป็นรูปประจำตัว"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium" />
+
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMain"
+        android:onClick="updateDisplay"
+        android:text="ต่อไป"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium" />
+>>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
 </LinearLayout>

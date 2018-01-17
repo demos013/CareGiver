@@ -1,10 +1,12 @@
 package com.caregiver.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by Demos on 1/13/2018.
  */
 
-public class Elder {
+public class Elder implements Serializable{
     private String mobile_number;
     private String uid;
     private String photo_path;
@@ -22,8 +24,7 @@ public class Elder {
     private String relation_elder;
     private String relative_mobile_number;
 
-    public Elder() {
-    }
+
 
     public Elder(String mobile_number, String uid, String photo_path, String name, String lastname, String citizen_id, String date_of_birth, String job, String address, String telephone, String drug_allergy, String blood_group, String relative_name, String relative_lastname, String relation_elder, String relative_mobile_number) {
         this.mobile_number = mobile_number;
@@ -42,6 +43,27 @@ public class Elder {
         this.relative_lastname = relative_lastname;
         this.relation_elder = relation_elder;
         this.relative_mobile_number = relative_mobile_number;
+    }
+
+
+    public Elder() {
+        this.mobile_number = "null";
+        this.uid = "null";
+        this.name = "null";
+        this.lastname = "null";
+        this.citizen_id = "null";
+        this.date_of_birth = "null";
+        this.job = "null";
+        this.address = "null";
+        this.telephone = "null";
+        this.drug_allergy = "null";
+        this.blood_group = "null";
+        this.relative_name = "null";
+        this.relative_lastname = "null";
+        this.relation_elder = "null";
+        this.relative_mobile_number = "null";
+        this.photo_path = "null";
+        this.relation_elder = "null";
     }
 
     public String getMobile_number() {

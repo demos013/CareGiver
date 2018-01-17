@@ -43,7 +43,12 @@
             android:background="@color/colorMain"
             android:textColor="@color/White"
             android:textSize="@dimen/font_medium"
+<<<<<<< HEAD
             android:text="@string/sign_in" />
+=======
+            android:text="เข้าสู่ระบบ"
+            android:onClick="onSignin"/>
+>>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
 
         <Button
             android:id="@+id/authentication_button_sign_up"

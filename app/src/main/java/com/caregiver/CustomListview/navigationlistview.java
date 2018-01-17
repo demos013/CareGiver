@@ -50,7 +50,7 @@ public class navigationlistview extends BaseAdapter {
         LayoutInflater mInflater =
                 (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if(view == null)
-            view = mInflater.inflate(R.layout.listview_row, viewGroup, false);
+            view = mInflater.inflate(R.layout.listview_row_navigation, viewGroup, false);
         TextView itemname = view.findViewById(R.id.item_navi);
 
         itemname.setText(strName[i]);
