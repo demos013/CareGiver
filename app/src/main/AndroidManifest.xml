@@ -37,7 +37,8 @@
         <activity android:name=".Update_Profile_Elder" />
         <activity android:name=".Register_Caregiver" />
         <activity android:name=".Update_Profile_Caregiver" />
-        <activity android:name=".Listview_Show"></activity>
+        <activity android:name=".Listview_Show" />
+        <activity android:name=".CareGiver_in_box"></activity>
     </application>
 
 </manifest>

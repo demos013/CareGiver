@@ -34,10 +34,9 @@ dependencies {
     compile 'com.google.firebase:firebase-core:11.8.0'
     compile 'com.google.firebase:firebase-auth:11.8.0'
     compile 'com.chaos.view:pinview:1.2.0'
-    compile ('io.nlopez.smartlocation:library:3.3.3') {
+    compile('io.nlopez.smartlocation:library:3.3.3') {
 
     }
-
 
 
 }

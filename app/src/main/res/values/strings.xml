@@ -27,4 +27,7 @@
     <string name="take_photo_by_camera">ถ่ายรูปเพื่อเลือกเป็นรูปประจำตัว</string>
     <string name="choose_photo_from_gallery">เลือกรูปประจำตัวจากคลังภาพ</string>
     <string name="next">ต่อไป</string>
+    <string name="inbox">กล่องขาเข้า</string>
+    <string name="under">ผู้สูงอายุที่อยู่ในการดูแล</string>
+    <string name="more">เพิ่มเติม</string>
 </resources>
