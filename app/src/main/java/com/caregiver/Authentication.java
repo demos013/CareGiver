@@ -1,6 +1,5 @@
 package com.caregiver;
 
-import android.*;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,7 +30,7 @@ public class Authentication extends AppCompatActivity {
             public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Intent intent = new Intent(Authentication.this,Map.class);
+                    Intent intent = new Intent(Authentication.this,Map_Show.class);
                     startActivity(intent);
                 } else {
                     // User is signed out
@@ -54,6 +53,13 @@ public class Authentication extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
+
+    public void onSignin(View view){
+        Intent intent = new Intent(Authentication.this,Signup_by_phone.class);
+        intent.putExtra("isSignIn",true);
+        startActivity(intent);
+    }
+
 
     public void onSignup(View view){
         Intent intent = new Intent(Authentication.this,Signup_Select.class);

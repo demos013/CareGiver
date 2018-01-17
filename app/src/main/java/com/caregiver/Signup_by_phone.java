@@ -1,20 +1,12 @@
 package com.caregiver;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.chaos.view.PinView;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,7 +21,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class Signup_by_phone extends AppCompatActivity {
@@ -38,6 +29,7 @@ public class Signup_by_phone extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private FirebaseAuth mAuth;
     private Boolean isElder;
+    private boolean isSignIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +37,7 @@ public class Signup_by_phone extends AppCompatActivity {
         setContentView(R.layout.activity_signup_by_phone);
         mAuth = FirebaseAuth.getInstance();
         isElder = getIntent().getBooleanExtra("iselder",true);
+        isSignIn = getIntent().getBooleanExtra("isSignIn", false);
 
 
 
@@ -124,19 +117,25 @@ public class Signup_by_phone extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("success", "signInWithCredential:success");
                             FirebaseUser user = task.getResult().getUser();
-                            if(isElder){
-                                Intent intent = new Intent(Signup_by_phone.this , Register_Elder.class);
-                                intent.putExtra("elder_id",user.getUid());
-                                intent.putExtra("elder_mobile_number",user.getPhoneNumber());
+                            if(isSignIn){
+                                Intent intent = new Intent(Signup_by_phone.this , Map_Show.class);
                                 startActivity(intent);
-
                             }
                             else{
-                                Intent intent = new Intent(Signup_by_phone.this , Register_Caregiver.class);
-                                intent.putExtra("caregiver_id",user.getUid());
-                                intent.putExtra("caregiver_id_mobile_number",user.getPhoneNumber());
-                                startActivity(intent);
+                                if(isElder){
+                                    Intent intent = new Intent(Signup_by_phone.this , Register_Elder.class);
+                                    intent.putExtra("elder_id",user.getUid());
+                                    intent.putExtra("elder_mobile_number",user.getPhoneNumber());
+                                    startActivity(intent);
 
+                                }
+                                else{
+                                    Intent intent = new Intent(Signup_by_phone.this , Register_Caregiver.class);
+                                    intent.putExtra("caregiver_id",user.getUid());
+                                    intent.putExtra("caregiver_id_mobile_number",user.getPhoneNumber());
+                                    startActivity(intent);
+
+                                }
                             }
                         } else {
                             // Sign in failed, display a message and update the UI

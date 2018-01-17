@@ -1,6 +1,5 @@
 package com.caregiver;
 
-import android.*;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -17,7 +16,6 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ThemedSpinnerAdapter;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,7 +23,6 @@ import android.widget.ImageView;
 import com.caregiver.Model.Elder;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -167,7 +164,7 @@ public class Update_Profile_Elder extends AppCompatActivity {
                 DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference mUsersRef = mRootRef.child("Elder");
                 mUsersRef.child(elderDB.getUid()).setValue(elderDB);
-                Intent intent = new Intent(Update_Profile_Elder.this,Map.class);
+                Intent intent = new Intent(Update_Profile_Elder.this,Map_Show.class);
                 intent.putExtra("elderDB",elderDB);
                 startActivity(intent);
 

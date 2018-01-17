@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/location_map"
+        android:icon="@drawable/location_map"
+        android:orderInCategory="100"
+        android:title="location_map"
+        app:actionViewClass="android.support.v7.widget.map"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/filter"
+        android:icon="@drawable/filter"
+        android:orderInCategory="99"
+        android:title="filter"
+        app:actionViewClass="android.support.v7.widget.listview"
+        app:showAsAction="always" />
+
+
+
+
+</menu>

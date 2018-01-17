@@ -1,6 +1,5 @@
 package com.caregiver;
 
-import android.*;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -162,7 +161,7 @@ public class Update_Profile_Caregiver extends AppCompatActivity {
                 DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference mUsersRef = mRootRef.child("Caregiver");
                 mUsersRef.child(caregiverDB.getUid()).setValue(caregiverDB);
-                Intent intent = new Intent(Update_Profile_Caregiver.this,Map.class);
+                Intent intent = new Intent(Update_Profile_Caregiver.this,Map_Show.class);
                 intent.putExtra("caregiverDB",caregiverDB);
                 startActivity(intent);
                 Log.d("success", "onSuccess: ");

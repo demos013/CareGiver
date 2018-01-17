@@ -45,7 +45,8 @@
             android:background="@color/colorMain"
             android:textColor="@color/White"
             android:textSize="@dimen/font_medium"
-            android:text="เข้าสู่ระบบ" />
+            android:text="เข้าสู่ระบบ"
+            android:onClick="onSignin"/>
 
         <Button
             android:id="@+id/button2"

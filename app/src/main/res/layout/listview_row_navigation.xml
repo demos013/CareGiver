@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:gravity="center_vertical"
     android:background="#ffffff"
-    >
+    android:gravity="center_vertical">
+
 
     <TextView
         android:id="@+id/item_navi"
@@ -15,6 +15,4 @@
         android:paddingLeft="16dp"
         android:textSize="20sp"
         android:textColor="#000000"/>
-
-
 </LinearLayout>

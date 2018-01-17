@@ -31,12 +31,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".Signup_by_phone" />
-        <activity android:name=".Map" />
+        <activity android:name=".Map_Show" />
         <activity android:name=".Signup_Select" />
         <activity android:name=".Register_Elder" />
         <activity android:name=".Update_Profile_Elder" />
         <activity android:name=".Register_Caregiver" />
-        <activity android:name=".Update_Profile_Caregiver"></activity>
+        <activity android:name=".Update_Profile_Caregiver" />
+        <activity android:name=".Listview_Show"></activity>
     </application>
 
 </manifest>
