@@ -2,6 +2,7 @@ package com.caregiver;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.location.Location;
 import android.support.annotation.DrawableRes;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,15 +17,29 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.caregiver.CustomListview.navigationlistview;
+import com.caregiver.Model.Elder;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import io.nlopez.smartlocation.OnLocationUpdatedListener;
+import io.nlopez.smartlocation.SmartLocation;
+import io.nlopez.smartlocation.location.config.LocationParams;
 
 public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private Elder elderDB;
 
     private String[] mDrawerTitle = {"Add Name","Home","Hidden", "My Buddy", "Buddy Requests", "Sign out"};
     private ActionBarDrawerToggle mDrawerToggle;
@@ -34,6 +49,7 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
     }
 
     @Override
@@ -45,7 +61,9 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
             public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
+                    getUserDB(user.getUid());
                     setupNavigationBar();
+                    updateLocation();
 
                 } else {
                     startActivity(new Intent(Map_Show.this,Authentication.class));
@@ -62,6 +80,10 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+
+        SmartLocation.with(this)
+                .location()
+                .stop();
     }
 
     public void signout(View view){
@@ -150,6 +172,45 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
         return true;
+    }
+
+    public void updateLocation(){
+
+        if(SmartLocation.with(this).location().state().locationServicesEnabled()) {
+            SmartLocation.with(this)
+                    .location()
+                    .config(LocationParams.LAZY)
+                    .start(new OnLocationUpdatedListener() {
+                        @Override
+                        public void onLocationUpdated(Location location) {
+                            DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                            DatabaseReference mUsersRef = mRootRef.child("Elder").child(elderDB.getUid());
+
+                            Map<String,Object> newLocation = new HashMap<>();
+                            newLocation.put("location",new com.caregiver.Model.Location(location.getLatitude(),location.getLongitude()));
+                            mUsersRef.updateChildren(newLocation);
+                        }
+                    });
+        } else {
+            //do someting
+        }
+    }
+
+    public void getUserDB(String uid){
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mUsersRef = mRootRef.child("Elder").child(uid);
+        mUsersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+               elderDB = (Elder) dataSnapshot.getValue();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 }

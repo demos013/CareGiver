@@ -18,6 +18,7 @@ public class Caregiver  implements Serializable {
     private String telephone;
     private String specialization;
     private String carecenter_id;
+    private Location location;
 
     public Caregiver() {
         this.mobile_number = "null";
@@ -31,6 +32,7 @@ public class Caregiver  implements Serializable {
         this.telephone = "null";
         this.specialization = "null";
         this.carecenter_id = "null";
+        this.location = new Location();
     }
 
     public Caregiver(String mobile_number, String uid, String photo_path, String name, String lastname, String citizen_id, String date_of_birth, String address, String telephone, String specialization, String carecenter_id) {
@@ -133,5 +135,13 @@ public class Caregiver  implements Serializable {
 
     public void setCarecenter_id(String care_center_id) {
         this.carecenter_id = care_center_id;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

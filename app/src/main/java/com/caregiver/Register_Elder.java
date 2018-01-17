@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.caregiver.Model.Elder;
+import com.caregiver.Model.Location;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -55,6 +56,7 @@ public class Register_Elder extends AppCompatActivity {
         elderDB.setRelative_lastname(edttemp.getText().toString());
         edttemp = findViewById(R.id.register_elder_relative_telephone);
         elderDB.setRelative_mobile_number(edttemp.getText().toString());
+
 
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mUsersRef = mRootRef.child("Elder");

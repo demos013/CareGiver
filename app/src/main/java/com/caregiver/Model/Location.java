@@ -1,30 +1,29 @@
 package com.caregiver.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by Demos on 1/14/2018.
  */
 
-public class Location {
-    private String uid;
+public class Location implements Serializable {
+
     private Double latitude;
     private Double longitude;
 
     public Location() {
+        latitude = 0.0;
+        longitude = 0.0;
+
     }
 
-    public Location(String uid, Double latitude, Double longitude) {
-        this.uid = uid;
+    public Location(Double latitude, Double longitude) {
+
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public String getUid() {
-        return uid;
-    }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
 
     public Double getLatitude() {
         return latitude;

@@ -1,5 +1,7 @@
 package com.caregiver.Model;
 
+import android.location.*;
+
 import java.io.Serializable;
 
 /**
@@ -23,6 +25,7 @@ public class Elder implements Serializable{
     private String relative_lastname;
     private String relation_elder;
     private String relative_mobile_number;
+    private Location location ;
 
 
 
@@ -43,6 +46,7 @@ public class Elder implements Serializable{
         this.relative_lastname = relative_lastname;
         this.relation_elder = relation_elder;
         this.relative_mobile_number = relative_mobile_number;
+        this.location = new Location();
     }
 
 
@@ -64,6 +68,7 @@ public class Elder implements Serializable{
         this.relative_mobile_number = "null";
         this.photo_path = "null";
         this.relation_elder = "null";
+        this.location = new Location();
     }
 
     public String getMobile_number() {
@@ -192,5 +197,13 @@ public class Elder implements Serializable{
 
     public void setRelative_mobile_number(String relative_mobile_number) {
         this.relative_mobile_number = relative_mobile_number;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }
