@@ -65,7 +65,7 @@
         </FrameLayout>
 
         <ListView
-            android:id="@+id/map_drawer"
+            android:id="@+id/drawer"
             android:layout_width="180dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.caregiver.Register_Elder"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center_horizontal"
+    android:layout_marginTop="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +44,7 @@
                 android:textSize="@dimen/font_small" />
 
             <EditText
-                android:id="@+id/register_elder_last_name"
+                android:id="@+id/register_elder_lastname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"

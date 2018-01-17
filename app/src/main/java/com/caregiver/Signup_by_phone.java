@@ -45,7 +45,7 @@ public class Signup_by_phone extends AppCompatActivity {
     }
 
     public void onSubmit(View view){
-        EditText phoneedt = findViewById(R.id.editText3);
+        EditText phoneedt = findViewById(R.id.sign_up_by_phone_button_get_otp);
         sendCode(phoneedt.getText().toString());
     }
 
@@ -98,7 +98,7 @@ public class Signup_by_phone extends AppCompatActivity {
     }
 
     public void verify(View view){
-        PinView pinView = (PinView) findViewById(R.id.pinView);
+        PinView pinView = (PinView) findViewById(R.id.sign_up_by_phone_pin_OTP);
 
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, pinView.getText().toString());
         signInWithPhoneAuthCredential(credential);
@@ -112,7 +112,7 @@ public class Signup_by_phone extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            PinView pinView = (PinView) findViewById(R.id.pinView);
+                            PinView pinView = (PinView) findViewById(R.id.sign_up_by_phone_pin_OTP);
                             pinView.setText(credential.getSmsCode());
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("success", "signInWithCredential:success");

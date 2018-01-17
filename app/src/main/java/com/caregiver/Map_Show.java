@@ -175,7 +175,6 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
     }
 
     public void updateLocation(){
-
         if(SmartLocation.with(this).location().state().locationServicesEnabled()) {
             SmartLocation.with(this)
                     .location()

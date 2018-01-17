@@ -4,15 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
-    tools:context="com.caregiver.Register_Elder"
-    android:orientation="vertical"
-    android:gravity="center">
-=======
     tools:context="com.caregiver.Register_Caregiver"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
->>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
+    android:gravity="center_horizontal"
+    android:layout_marginTop="20dp">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,42 +17,23 @@
         android:orientation="vertical">
 
         <TextView
-<<<<<<< HEAD
-            android:id="@+id/register_caregiver_header"
-=======
             android:id="@+id/textView"
->>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:gravity="center"
-<<<<<<< HEAD
-            android:text="@string/be_a_care_giver"
-=======
             android:text="สมัครสมาชิกเป็นผู้ดูแล"
->>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
             android:textSize="@dimen/font_medium" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-<<<<<<< HEAD
-        android:layout_height="350dp"
-        android:fillViewport="true">
-=======
-        android:layout_height="wrap_content"
-        android:fillViewport="true"
 
-        >
->>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-=======
-
->>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
             android:orientation="vertical">
 
             <EditText
@@ -64,28 +41,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-<<<<<<< HEAD
-                android:hint="@string/name"
-=======
                 android:hint="ชื่อ"
->>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
                 android:inputType="textPersonName"
                 android:textSize="@dimen/font_small" />
 
             <EditText
-<<<<<<< HEAD
-                android:id="@+id/register_caregiver_last_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/last_name"
-=======
                 android:id="@+id/register_caregiver_lastname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="นามสกุล"
->>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
                 android:inputType="textPersonName"
                 android:textSize="@dimen/font_small" />
 
@@ -94,11 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-<<<<<<< HEAD
-                android:hint="@string/citizen_id"
-=======
                 android:hint="เลขบัตรประจำตัวประชาชน"
->>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
                 android:inputType="textPersonName"
                 android:textSize="@dimen/font_small" />
 
@@ -107,7 +68,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-<<<<<<< HEAD
                 android:hint="@string/date_of_birth"
                 android:inputType="textPersonName" />
 
@@ -116,10 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/job"
-=======
                 android:hint="วันเดือนปีเกิด"
->>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
                 android:inputType="textPersonName" />
 
             <EditText
@@ -127,11 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-<<<<<<< HEAD
-                android:hint="@string/address"
-=======
                 android:hint="ที่อยู่"
->>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
                 android:inputType="textPersonName" />
 
             <EditText
@@ -139,65 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-<<<<<<< HEAD
                 android:hint="@string/telephone"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/register_caregiver_drug_allergy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/drug_allergy"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/register_caregiver_blood_group"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/blood_group"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/register_caregiver_relative_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/relative_name"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/register_caregiver_relative_lastname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/relative_last_name"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/register_caregiver_relative_telephone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/relative_telephone"
-                android:inputType="textPersonName" />
-
-        </LinearLayout>
-    </ScrollView>
-    <Button
-        android:id="@+id/register_caregiver_button_sign_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_up"
-        android:gravity="center"
-        android:textColor="@color/White"
-        android:textSize="@dimen/font_medium"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorMain"
-        android:onClick="onClickRegisterElder" />
-=======
-                android:hint="เบอร์โทรศัพทร์บ้าน"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -209,27 +104,34 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/register_caregiver_carecenter_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="สังกัด"
-                android:inputType="textPersonName" />
+                        android:id="@+id/register_caregiver_carecenter_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="สังกัด"
+                        android:inputType="textPersonName" />
 
         </LinearLayout>
-
     </ScrollView>
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/register_caregiver_button_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        android:gravity="center"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium"
         android:layout_marginTop="20dp"
         android:background="@color/colorMain"
-        android:gravity="center"
-        android:onClick="onClickRegisterCaregiver"
-        android:text="สมัครสมาชิก"
-        android:textColor="@color/White"
-        android:textSize="@dimen/font_medium" />
->>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
+        android:onClick="onClickRegisterCaregiver" />
+
+
+
+
 </LinearLayout>
+
+
+
+
+
