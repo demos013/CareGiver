@@ -7,7 +7,9 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ToggleButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -56,7 +58,18 @@ public class Authentication extends AppCompatActivity {
 
     public void onSignin(View view){
         Intent intent = new Intent(Authentication.this,Signup_by_phone.class);
-        intent.putExtra("isSignIn",true);
+        ToggleButton caregiverMode = findViewById(R.id.authentication_toggle_button_mode_care_giver);
+
+
+        if(caregiverMode.isChecked()){
+            Log.d("ischeakerd", "onSignin: ");
+            intent.putExtra("isSignIn",true);
+            intent.putExtra("isElder",false);
+        }
+        else{
+            intent.putExtra("isSignIn",true);
+            intent.putExtra("isElder",true);
+        }
         startActivity(intent);
     }
 
@@ -89,6 +102,19 @@ public class Authentication extends AppCompatActivity {
                 requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
                         MY_REQUEST_CODE);
             }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.INTERNET},
+                        MY_REQUEST_CODE);
+            }
+            return;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.INTERNET},
+                    MY_REQUEST_CODE);
+        }
     }
 
 }

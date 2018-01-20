@@ -29,14 +29,16 @@ public class Signup_by_phone extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private FirebaseAuth mAuth;
     private Boolean isElder;
-    private boolean isSignIn;
+    private Boolean isSignIn;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_by_phone);
         mAuth = FirebaseAuth.getInstance();
-        isElder = getIntent().getBooleanExtra("iselder",true);
+        isElder = getIntent().getBooleanExtra("isElder",false);
         isSignIn = getIntent().getBooleanExtra("isSignIn", false);
 
 
@@ -45,7 +47,7 @@ public class Signup_by_phone extends AppCompatActivity {
     }
 
     public void onSubmit(View view){
-        EditText phoneedt = findViewById(R.id.sign_up_by_phone_button_get_otp);
+        EditText phoneedt = findViewById(R.id.sign_up_by_phone_telephone_number);
         sendCode(phoneedt.getText().toString());
     }
 
@@ -118,8 +120,14 @@ public class Signup_by_phone extends AppCompatActivity {
                             Log.d("success", "signInWithCredential:success");
                             FirebaseUser user = task.getResult().getUser();
                             if(isSignIn){
-                                Intent intent = new Intent(Signup_by_phone.this , Map_Show.class);
-                                startActivity(intent);
+                                if(isElder){
+                                    Intent intent = new Intent(Signup_by_phone.this , Map_Show.class);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    Intent intent = new Intent(Signup_by_phone.this , CareGiver_in_box.class);
+                                    startActivity(intent);
+                                }
                             }
                             else{
                                 if(isElder){

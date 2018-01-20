@@ -39,6 +39,7 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    FirebaseUser user;
     private Elder elderDB;
 
     private String[] mDrawerTitle = {"Add Name","Home","Hidden", "My Buddy", "Buddy Requests", "Sign out"};
@@ -59,8 +60,9 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                user = firebaseAuth.getCurrentUser();
                 if (user != null) {
+
                     getUserDB(user.getUid());
                     setupNavigationBar();
                     updateLocation();
@@ -183,8 +185,7 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
                         @Override
                         public void onLocationUpdated(Location location) {
                             DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-                            DatabaseReference mUsersRef = mRootRef.child("Elder").child(elderDB.getUid());
-
+                            DatabaseReference mUsersRef = mRootRef.child("Elder").child(user.getUid());
                             Map<String,Object> newLocation = new HashMap<>();
                             newLocation.put("location",new com.caregiver.Model.Location(location.getLatitude(),location.getLongitude()));
                             mUsersRef.updateChildren(newLocation);
@@ -201,9 +202,9 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
         mUsersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-               elderDB = (Elder) dataSnapshot.getValue();
+               elderDB =  dataSnapshot.getValue(Elder.class);
+                Log.d(elderDB.getUid(), "onDataChange: ");
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 

@@ -7,12 +7,12 @@ package com.caregiver.Model;
 public class Request_Care_Activity {
     private String elder_uid;
     private String caregiver_id;
-    private String confirm_key;
+    private int confirm_key;
 
     public Request_Care_Activity() {
     }
 
-    public Request_Care_Activity(String elder_uid, String caregiverid, String confirm_key) {
+    public Request_Care_Activity(String elder_uid, String caregiverid, int confirm_key) {
         this.elder_uid = elder_uid;
         caregiver_id = caregiverid;
         this.confirm_key = confirm_key;
@@ -34,11 +34,11 @@ public class Request_Care_Activity {
         this.caregiver_id = caregiver_id;
     }
 
-    public String getConfirm_key() {
+    public int getConfirm_key() {
         return confirm_key;
     }
 
-    public void setConfirm_key(String confirm_key) {
+    public void setConfirm_key(int confirm_key) {
         this.confirm_key = confirm_key;
     }
 }

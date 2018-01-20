@@ -99,7 +99,7 @@ public class Update_Profile_Caregiver extends AppCompatActivity {
             try {
                 Bitmap bmpPic = BitmapFactory.decodeFile(filePath.replace("file://", ""));
                 FileOutputStream bmpFile = new FileOutputStream(filePath.replace("file://", ""));
-                bmpPic = Bitmap.createScaledBitmap(bmpPic, 600, 400, true);
+                bmpPic = Bitmap.createScaledBitmap(bmpPic, 400, 400, true);
                 Matrix mat = new Matrix();
                 mat.postRotate(270);
                 bmpPic = Bitmap.createBitmap(bmpPic, 0, 0, bmpPic.getWidth(), bmpPic.getHeight(), mat, true);
@@ -161,7 +161,7 @@ public class Update_Profile_Caregiver extends AppCompatActivity {
                 DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference mUsersRef = mRootRef.child("Caregiver");
                 mUsersRef.child(caregiverDB.getUid()).setValue(caregiverDB);
-                Intent intent = new Intent(Update_Profile_Caregiver.this,Map_Show.class);
+                Intent intent = new Intent(Update_Profile_Caregiver.this,CareGiver_in_box.class);
                 intent.putExtra("caregiverDB",caregiverDB);
                 startActivity(intent);
                 Log.d("success", "onSuccess: ");

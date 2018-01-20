@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/row_image_caregiver"
         android:layout_width="100dp"
         android:layout_height="100dp"
 
@@ -18,21 +18,21 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/row_name_caregiver"
             android:layout_width="wrap_content"
             android:layout_height="37dp"
             android:layout_weight="1"
             android:text="Full Name" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/row_decrip_caregiver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Decrip" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/row_rating_caregiver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -129,7 +129,7 @@ public class Update_Profile_Elder extends AppCompatActivity {
                 Log.d("imgDecodableString",imgDecodableString);
                 filePath ="file://"+imgDecodableString;
                 Bitmap bmpPic = BitmapFactory.decodeFile(imgDecodableString);
-                bmpPic = Bitmap.createScaledBitmap(bmpPic, 400, 600, true);
+                bmpPic = Bitmap.createScaledBitmap(bmpPic, 400, 400, true);
                 img = (ImageView) findViewById(R.id.update_profile_elder_display);
                 img.setImageBitmap(bmpPic);
             }catch  (Exception e) {
