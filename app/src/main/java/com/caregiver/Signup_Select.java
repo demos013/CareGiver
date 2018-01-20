@@ -19,14 +19,14 @@ public class Signup_Select extends AppCompatActivity {
     public void onClickElder(View v){
         isElder = true;
         Intent intent = new Intent(Signup_Select.this,Signup_by_phone.class);
-        intent.putExtra("iselder",isElder);
+        intent.putExtra("isElder",isElder);
         startActivity(intent);
     }
 
     public void onClickCareGiver(View v){
         isElder = false;
         Intent intent = new Intent(Signup_Select.this,Signup_by_phone.class);
-        intent.putExtra("iselder",isElder);
+        intent.putExtra("isElder",isElder);
         startActivity(intent);
 
     }

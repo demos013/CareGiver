@@ -7,9 +7,14 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission
         android:name="android.permission.CAMERA"
         android:required="true" />
+
+    <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
 
     <application
         android:allowBackup="true"
@@ -39,7 +44,8 @@
         <activity android:name=".Update_Profile_Caregiver" />
         <activity android:name=".Listview_Show" />
         <activity android:name=".CareGiver_in_box" />
-        <activity android:name=".Caregiver_Detail"></activity>
+        <activity android:name=".Caregiver_Detail" />
+        <activity android:name=".Elderly_Detail"></activity>
     </application>
 
 </manifest>

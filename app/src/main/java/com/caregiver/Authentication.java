@@ -1,9 +1,12 @@
 package com.caregiver;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Authentication extends AppCompatActivity {
 
+    private static final int REQUEST_CODE = 10101;
     private int MY_REQUEST_CODE = 100;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -95,26 +99,35 @@ public class Authentication extends AppCompatActivity {
                 requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
                         MY_REQUEST_CODE);
             }
-            return;
-        }
-
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
+                requestPermissions(new String[]{Manifest.permission.READ_SMS},
                         MY_REQUEST_CODE);
             }
+        }
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED ) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(new String[]{Manifest.permission.INTERNET},
                         MY_REQUEST_CODE);
             }
-            return;
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{Manifest.permission.INTERNET},
-                    MY_REQUEST_CODE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_REQUEST_CODE);
+            }
         }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.CAMERA},
+                        MY_REQUEST_CODE);
+            }
+        }
+
     }
+
+
 
 }

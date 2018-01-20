@@ -1,14 +1,12 @@
 package com.caregiver;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +14,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.caregiver.Model.Caregiver;
+import com.caregiver.Model.Elder;
 import com.caregiver.Model.Request_Care_Activity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,27 +37,26 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import io.nlopez.smartlocation.SmartLocation;
 
-public class Caregiver_Detail extends AppCompatActivity {
+public class Elderly_Detail extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     FirebaseUser user;
-    private Caregiver caregiverDB;
+    Elder elderDB;
+    Request_Care_Activity request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_caregiver__detail);
-        caregiverDB = (Caregiver) getIntent().getSerializableExtra("caregiverDB");
-        TextView tmp = findViewById(R.id.caregiver_detail_name);
-        tmp.setText(caregiverDB.getName()+" "+caregiverDB.getLastname());
-        ImageView img = findViewById(R.id.caregiver_detail_display);
-        downloadInLocalFile(img,caregiverDB);
+        setContentView(R.layout.activity_elderly__detail);
+        elderDB = (Elder) getIntent().getSerializableExtra("elderDB");
+        ImageView img = findViewById(R.id.elderly_detail_display);
+        downloadInLocalFile(img,elderDB);
 
 
     }
@@ -71,16 +70,13 @@ public class Caregiver_Detail extends AppCompatActivity {
             public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
                 user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    //getUserDB(user.getUid());
                     //setupNavigationBar();
-                    //updateLocation();
-                    //getCaregiverDB();
-                    isBooking();
+                    getRequestActivity();
 
 
 
                 } else {
-                    startActivity(new Intent(Caregiver_Detail.this,Authentication.class));
+                    startActivity(new Intent(Elderly_Detail.this,Authentication.class));
                 }
                 // ...
             }
@@ -95,9 +91,9 @@ public class Caregiver_Detail extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
 
-        /*SmartLocation.with(this)
+        SmartLocation.with(this)
                 .location()
-                .stop();*/
+                .stop();
     }
 
     public static Bitmap GetBitmapClippedCircle(Bitmap bitmap) {
@@ -119,9 +115,9 @@ public class Caregiver_Detail extends AppCompatActivity {
         return outputBitmap;
     }
 
-    private void downloadInLocalFile(final ImageView img, Caregiver caregiverDB) {
+    private void downloadInLocalFile(final ImageView img, Elder elderDB) {
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference imageRef = storageRef.child("display_caregiver/"+caregiverDB.getUid()+".png");
+        StorageReference imageRef = storageRef.child("display_elder/"+elderDB.getUid()+".png");
         File dir = new File(Environment.getExternalStorageDirectory() + "/photos");
         final File file = new File(dir, UUID.randomUUID().toString() + ".png");
         try {
@@ -151,64 +147,71 @@ public class Caregiver_Detail extends AppCompatActivity {
         });
     }
 
-    public void onBookingCaregiver (View view){
+    public void onCallElder(View view){
+        String phone = elderDB.getMobile_number();
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+        startActivity(intent);
+
+    }
+
+    public void onConfirmActivity(View view){
+        showDialogConfirmActivity(view);
+
+    }
+
+    public void showDialogConfirmActivity(final View view){
+
+        final Dialog dialog = new Dialog(Elderly_Detail.this);
+        dialog.setContentView(R.layout.dialog_confirm_activity);
+
+        final EditText confirm_key = (EditText) dialog.findViewById(R.id.dialog_confirm_activity_key);
+
+        Button buttonCancel = (Button) dialog.findViewById(R.id.dialog_confirm_activity_cancel);
+        Button buttonAdd = (Button) dialog.findViewById(R.id.dialog_confirm_activity_ok);
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(confirm_key.getText().toString().equals(String.valueOf(request.getConfirm_key()))){
+                    //dialog.dismiss();
+                    Log.d(confirm_key.getText().toString()+" "+String.valueOf(request.getConfirm_key()), "onClick: ");
+                }
+                else{
+                    confirm_key.setError("Invalid confirm key!!!");
+                }
+
+
+
+            }
+        });
+
+
+        dialog.show();
+
+    }
+
+    public void getRequestActivity(){
+        request = new Request_Care_Activity();
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mUsersRef = mRootRef.child("Request_Care_Activity");
-        Request_Care_Activity request = new Request_Care_Activity();
-        int confirmkey = generateRandomNumber();
-        request.setCaregiver_id(caregiverDB.getUid());
-        request.setElder_uid(user.getUid());
-        request.setConfirm_key(confirmkey);
-        mUsersRef.child(user.getUid()+caregiverDB.getUid()).setValue(request);
-        Button bookingbt = findViewById(R.id.caregiver_detail_booking_button);
-        bookingbt.setVisibility(View.GONE);
-        TextView confirmkeytxt = findViewById(R.id.caregiver_detail_confirm_key);
-        confirmkeytxt.setText(String.valueOf(confirmkey));
-        confirmkeytxt.setVisibility(View.VISIBLE);
-
-
-
-    }
-
-    public int generateRandomNumber() {
-        int randomNumber;
-        SecureRandom secureRandom = new SecureRandom();
-        String s = "";
-        for (int i = 0; i < 4; i++) {
-            int number = secureRandom.nextInt(9);
-            if (number == 0 && i == 0) { // to prevent the Zero to be the first number as then it will reduce the length of generated pin to three or even more if the second or third number came as zeros
-                i = -1;
-                continue;
-            }
-            s = s + number;
-        }
-        randomNumber = Integer.parseInt(s);
-        return randomNumber;
-    }
-
-    public void isBooking(){
-        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference mRequestRef = mRootRef.child("Request_Care_Activity");
-        Query query =  mRequestRef.orderByKey().equalTo(user.getUid()+caregiverDB.getUid());
+        Query query = mUsersRef.orderByKey().equalTo(elderDB.getUid()+user.getUid());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    Request_Care_Activity request = postSnapshot.getValue(Request_Care_Activity.class);
-                    Button bookingbt = findViewById(R.id.caregiver_detail_booking_button);
-                    bookingbt.setVisibility(View.GONE);
-                    TextView confirmkeytxt = findViewById(R.id.caregiver_detail_confirm_key);
-                    confirmkeytxt.setText(String.valueOf(request.getConfirm_key()));
-                    confirmkeytxt.setVisibility(View.VISIBLE);
-                    break;
+                    request = postSnapshot.getValue(Request_Care_Activity.class);
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }
-
 }

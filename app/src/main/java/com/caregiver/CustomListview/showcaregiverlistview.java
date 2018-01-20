@@ -62,6 +62,7 @@ public class showcaregiverlistview extends BaseAdapter {
                 (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if(view == null)
             view = mInflater.inflate(R.layout.listview_row_caregiver, viewGroup, false);
+
         ImageView img = view.findViewById(R.id.row_image_caregiver);
         downloadInLocalFile(img, AllCaregiverDB.get(i));
         TextView caregiver_name = view.findViewById(R.id.row_name_caregiver);

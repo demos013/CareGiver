@@ -102,7 +102,7 @@ public class Update_Profile_Elder extends AppCompatActivity {
             try {
                 Bitmap bmpPic = BitmapFactory.decodeFile(filePath.replace("file://", ""));
                 FileOutputStream bmpFile = new FileOutputStream(filePath.replace("file://", ""));
-                bmpPic = Bitmap.createScaledBitmap(bmpPic, 600, 400, true);
+                bmpPic = Bitmap.createScaledBitmap(bmpPic, 400, 400, true);
                 Matrix mat = new Matrix();
                 mat.postRotate(270);
                 bmpPic = Bitmap.createBitmap(bmpPic, 0, 0, bmpPic.getWidth(), bmpPic.getHeight(), mat, true);

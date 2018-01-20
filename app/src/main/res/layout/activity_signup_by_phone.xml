@@ -21,7 +21,7 @@
             android:ems="10"
             android:hint="@string/insert_phone_number"
             android:inputType="phone"
-            android:text="+66643122710" />
+            />
 
         <Button
             android:id="@+id/sign_up_by_phone_button_get_otp"
