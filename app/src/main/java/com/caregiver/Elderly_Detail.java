@@ -1,6 +1,8 @@
 package com.caregiver;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,13 +13,18 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.caregiver.Model.Care_Activity;
 import com.caregiver.Model.Caregiver;
 import com.caregiver.Model.Elder;
 import com.caregiver.Model.Request_Care_Activity;
@@ -37,7 +44,11 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.UUID;
 
 import io.nlopez.smartlocation.SmartLocation;
@@ -168,27 +179,87 @@ public class Elderly_Detail extends AppCompatActivity {
 
         Button buttonCancel = (Button) dialog.findViewById(R.id.dialog_confirm_activity_cancel);
         Button buttonAdd = (Button) dialog.findViewById(R.id.dialog_confirm_activity_ok);
-
+        final EditText dateedt = dialog.findViewById(R.id.dialog_confirm_activity_date);
+        dateedt.setInputType(InputType.TYPE_NULL);
+        dateedt.setTextIsSelectable(true);
+        final EditText timeedt = dialog.findViewById(R.id.dialog_confirm_activity_time);
+        timeedt.setInputType(InputType.TYPE_NULL);
+        timeedt.setTextIsSelectable(true);
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(confirm_key.getText().toString().equals(String.valueOf(request.getConfirm_key()))){
-                    //dialog.dismiss();
-                    Log.d(confirm_key.getText().toString()+" "+String.valueOf(request.getConfirm_key()), "onClick: ");
+                    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                    DatabaseReference mCareActivity = mRootRef.child("Care_Activity");
+                    Care_Activity activity = new Care_Activity();
+                    activity.setCaregiver_uid(user.getUid());
+                    activity.setElder_uid(elderDB.getUid());
+                    activity.setConfirm_key(String.valueOf(request.getConfirm_key()));
+                    activity.setStart_date(dateedt.getText().toString());
+                    activity.setStart_time(timeedt.getText().toString());
+                    activity.setStart_key(generateRandomNumber());
+                    mCareActivity.child(elderDB.getUid()+user.getUid()).setValue(activity);
+
+                    DatabaseReference mRequestActivity = mRootRef.child("Request_Care_Activity");
+                    mRequestActivity.child(elderDB.getUid()+user.getUid()).removeValue();
+                    dialog.dismiss();
+
                 }
                 else{
                     confirm_key.setError("Invalid confirm key!!!");
                 }
+            }
+        });
+
+        //date picker
+        final Calendar myCalendar = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                String myFormat = "dd/MM/yy"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                dateedt.setText(sdf.format(myCalendar.getTime()));
+            }
+
+        };
+        dateedt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(Elderly_Detail.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
 
 
+        });
+        //time picker
+        timeedt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(Elderly_Detail.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        timeedt.setText( selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
 
+                mTimePicker.show();
             }
         });
 
@@ -214,4 +285,21 @@ public class Elderly_Detail extends AppCompatActivity {
             }
         });
     }
+
+    public String generateRandomNumber() {
+
+        SecureRandom secureRandom = new SecureRandom();
+        String randomNumber = "";
+        for (int i = 0; i < 10; i++) {
+            int number = secureRandom.nextInt(9);
+            if (number == 0 && i == 0) { // to prevent the Zero to be the first number as then it will reduce the length of generated pin to three or even more if the second or third number came as zeros
+                i = -1;
+                continue;
+            }
+            randomNumber = randomNumber + number;
+        }
+        return randomNumber;
+    }
+
+
 }

@@ -16,6 +16,15 @@ public class Care_Activity {
     private String activity_detail;
 
     public Care_Activity() {
+        this.elder_uid = "null";
+        this.caregiver_uid = "null";
+        this.start_key = "null";
+        this.confirm_key = "null";
+        this.start_date = "null";
+        this.start_time = "null";
+        this.finish_time = "null";
+        this.finish_check = false;
+        this.activity_detail = "";
     }
 
     public Care_Activity(String elder_uid, String caregiver_uid, String start_key, String confirm_key, String start_date, String start_time, String finish_time, Boolean finish_check, String activity_detail) {

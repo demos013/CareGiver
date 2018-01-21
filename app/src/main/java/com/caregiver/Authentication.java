@@ -36,7 +36,7 @@ public class Authentication extends AppCompatActivity {
             public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Intent intent = new Intent(Authentication.this,Map_Show.class);
+                    Intent intent = new Intent(Authentication.this,CareGiver_in_box.class);
                     startActivity(intent);
                 } else {
                     // User is signed out

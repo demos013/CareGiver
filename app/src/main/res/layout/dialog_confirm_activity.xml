@@ -1,28 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="275dp"
-    android:layout_height="150dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/dialog_confirm_activity_key"
+    <TextView
+        android:id="@+id/textView16"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/colorMain"
-        android:hint="Confirm Key"
-        android:inputType="number"
-        android:maxLength="4"/>
+        android:text="ยืนยันกิจกรรมการดูแล"
+        android:textSize="@dimen/font_medium"
+        android:gravity="center"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/dialog_confirm_activity_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/colorMain"
+            android:ems="10"
+            android:hint="วันที่"
+            android:inputType="none"
+            android:textIsSelectable="true"
+            android:focusable="false"
+            />
+
+        <EditText
+            android:id="@+id/dialog_confirm_activity_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/colorMain"
+            android:ems="10"
+            android:hint="เวลา"
+            android:inputType="none"
+            android:textIsSelectable="true"
+            android:focusable="false"
+            />
+
+        <EditText
+            android:id="@+id/dialog_confirm_activity_key"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/colorMain"
+            android:hint="Confirm Key"
+            android:inputType="number"
+            android:maxLength="4" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/dialog_confirm_activity_ok"
