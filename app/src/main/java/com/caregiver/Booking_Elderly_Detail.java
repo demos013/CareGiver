@@ -83,7 +83,11 @@ public class Booking_Elderly_Detail extends AppCompatActivity  {
                     if(activity.getStart_check()){
                         EditText dailyedt = findViewById(R.id.booking_elderly_detail_daily);
                         dailyedt.setEnabled(true);
+
                         Button tmp = findViewById(R.id.booking_elderly_detail_end_button);
+                        if(activity.getFinish_check()){
+                            tmp.setVisibility(View.GONE);
+                        }
                         tmp.setVisibility(View.VISIBLE);
                         tmp = findViewById(R.id.booking_elderly_detail_start_button);
                         tmp.setVisibility(View.GONE);
@@ -195,10 +199,10 @@ public class Booking_Elderly_Detail extends AppCompatActivity  {
                 String[] split = tmp.split("/");
                 int age = Calendar.getInstance().get(Calendar.YEAR)-Integer.valueOf(split[2]);
                 agetxt.setText("อายุ "+String.valueOf(age)+" ปี");
-                sextxt.append(elderDB.getSex());
-                bloodtxt.append(elderDB.getBlood_group());
-                jobtxt.append(elderDB.getJob());
-                drugtxt.append(elderDB.getDrug_allergy());
+                sextxt.setText(elderDB.getSex());
+                bloodtxt.setText(elderDB.getBlood_group());
+                jobtxt.setText(elderDB.getJob());
+                drugtxt.setText(elderDB.getDrug_allergy());
                 dailyedt.setText(activity.getActivity_detail());
                 /*datetxt.append(request.getStart_date());
                 timetxt.append(request.getStart_time()+" นาฬิกา");*/
@@ -294,6 +298,8 @@ public class Booking_Elderly_Detail extends AppCompatActivity  {
                 mActivityRef.updateChildren(activity_finish_date);
                 mActivityRef.updateChildren(activity_finish_time);
                 dialog.dismiss();
+                Button finishButton = findViewById(R.id.booking_elderly_detail_end_button);
+                finishButton.setVisibility(View.GONE);
             }
         });
 
@@ -303,8 +309,6 @@ public class Booking_Elderly_Detail extends AppCompatActivity  {
                 dialog.dismiss();
             }
         });
-
-
 
         dialog.show();
 

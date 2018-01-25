@@ -128,36 +128,21 @@ public class CareGiver_in_box extends AppCompatActivity {
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mUsersRef = mRootRef.child("Request_Care_Activity");
         Query query = mUsersRef.orderByChild("caregiver_id").equalTo(user.getUid());
-        query.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    Log.d("1", "updateElder: ");
-                    AllRequestActivityDB.add(postSnapshot.getValue(Request_Care_Activity.class));
-                }
-                updateElderlyListView();
-            }
+       query.addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(DataSnapshot dataSnapshot) {
+               for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                   AllRequestActivityDB.add(postSnapshot.getValue(Request_Care_Activity.class));
+               }
+               updateElderlyListView();
+           }
 
-            }
+           @Override
+           public void onCancelled(DatabaseError databaseError) {
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+           }
+       });
     }
 
     public void getElderlyDB(String elder_uid){

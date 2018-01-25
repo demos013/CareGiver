@@ -195,7 +195,7 @@ public class Rating extends AppCompatActivity {
 
 
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference mRatingRef = mRootRef.child("Rating");
+        DatabaseReference mRatingRef = mRootRef.child("Review");
         mRatingRef.child(user.getUid()+activity.getCaregiver_uid()).setValue(rating);
 
         DatabaseReference mRecordActivityRef = mRootRef.child("Record_Care_Activity");

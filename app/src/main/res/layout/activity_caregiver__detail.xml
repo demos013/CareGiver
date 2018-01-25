@@ -10,7 +10,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +21,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical">
 
                 <ImageView
@@ -35,11 +36,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="caregiver_detail_name" />
+                    android:text="caregiver_detail_name"
+                    android:textSize="@dimen/font_small"/>
 
                 <RatingBar
                     android:id="@+id/ratingBar"
-                    style="?android:attr/ratingBarStyleSmall"
+                    style="?android:attr/ratingBarStyle"
+                    android:scaleX="0.7"
+                    android:scaleY="0.7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -59,7 +63,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Info" />
+                        android:onClick="onClickInfo"
+                        android:text="Info"
+                        android:textSize="@dimen/font_small"/>
 
                     <TextView
                         android:id="@+id/textView5"
@@ -67,27 +73,33 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Reviews" />
+                        android:onClick="onClickReview"
+                        android:text="Reviews"
+                        android:textSize="@dimen/font_small"/>
                 </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/Info"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textView3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/Grey"
-                        android:text="About" />
+                        android:background="@color/colorMain"
+                        android:paddingLeft="10dp"
+                        android:text="About"
+                        android:textSize="@dimen/font_small" />
 
                     <TextView
                         android:id="@+id/textView4"
@@ -102,15 +114,17 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textView7"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/Grey"
-                        android:text="Skill" />
+                        android:background="@color/colorMain"
+                        android:paddingLeft="10dp"
+                        android:text="Skill"
+                        android:textSize="@dimen/font_small" />
 
                     <TextView
                         android:id="@+id/textView8"
@@ -123,6 +137,25 @@
                         android:text="TextView" />
                 </LinearLayout>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Review"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/colorMain"
+                    android:orientation="vertical"></LinearLayout>
+
+                <ListView
+                    android:id="@+id/Caregiver_detail_listview_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
             </LinearLayout>
 
         </LinearLayout>
@@ -138,7 +171,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/colorMain"
+            android:background="@color/colorAccent"
             android:onClick="onBookingCaregiver"
             android:text="จองผู้ดูแล"
             android:textColor="@color/White"

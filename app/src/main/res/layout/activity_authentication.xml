@@ -10,9 +10,9 @@
     <ImageView
         android:id="@+id/authentication_imageView1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_gravity="center"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        app:srcCompat="@drawable/loading" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,30 +22,32 @@
 
         <Button
             android:id="@+id/authentication_button_sign_in"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:background="@color/colorMain"
-            android:textColor="@color/White"
-            android:textSize="@dimen/font_medium"
+            android:onClick="onSignin"
             android:text="เข้าสู่ระบบ"
-            android:onClick="onSignin"/>
+            android:textColor="@color/White"
+            android:textSize="@dimen/font_medium" />
 
 
         <Button
             android:id="@+id/authentication_button_sign_up"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="@string/sign_up"
+            android:layout_marginBottom="20dp"
             android:background="@color/colorMain"
+            android:onClick="onSignup"
+            android:text="@string/sign_up"
             android:textColor="@color/White"
-            android:textSize="@dimen/font_medium"
-            android:onClick="onSignup"/>
+            android:textSize="@dimen/font_medium" />
 
         <ToggleButton
             android:id="@+id/authentication_toggle_button_mode_care_giver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textOff="@string/mode_care_giver"
-            android:textOn="@string/mode_care_giver"  />
+            android:textOn="@string/mode_care_giver" />
     </LinearLayout>
 </LinearLayout>

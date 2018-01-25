@@ -22,11 +22,18 @@
             android:gravity="center"
             android:text="@string/be_an_elder"
             android:textSize="@dimen/font_medium" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/colorMain"
+            android:orientation="vertical"></LinearLayout>
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:fillViewport="true">
 
         <LinearLayout
@@ -41,7 +48,14 @@
                 android:ems="10"
                 android:hint="@string/name"
                 android:inputType="textPersonName"
-                android:textSize="@dimen/font_small" />
+                android:textSize="@dimen/font_small"
+                android:background="@drawable/border"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
 
             <EditText
                 android:id="@+id/register_elder_lastname"
@@ -50,7 +64,14 @@
                 android:ems="10"
                 android:hint="@string/last_name"
                 android:inputType="textPersonName"
-                android:textSize="@dimen/font_small" />
+                android:textSize="@dimen/font_small"
+                android:background="@drawable/border"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
 
             <EditText
                 android:id="@+id/register_elder_citizen_id"
@@ -58,8 +79,27 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/citizen_id"
-                android:inputType="textPersonName"
-                android:textSize="@dimen/font_small" />
+                android:inputType="number"
+                android:textSize="@dimen/font_small"
+                android:background="@drawable/border"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
+
+            <Spinner
+                android:id="@+id/register_elder_sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                />
+
 
             <EditText
                 android:id="@+id/register_elder_date_of_birth"
@@ -67,7 +107,15 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/date_of_birth"
-                android:inputType="textPersonName" />
+                android:inputType="number"
+                android:focusable="false"
+                android:background="@drawable/border"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
 
             <EditText
                 android:id="@+id/register_elder_job"
@@ -75,7 +123,14 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/job"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:background="@drawable/border"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
 
             <EditText
                 android:id="@+id/register_elder_address"
@@ -83,7 +138,14 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/address"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:background="@drawable/border"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
 
             <EditText
                 android:id="@+id/register_elder_telephone"
@@ -91,7 +153,14 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/telephone"
-                android:inputType="textPersonName" />
+                android:inputType="number"
+                android:background="@drawable/border"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
 
             <EditText
                 android:id="@+id/register_elder_drug_allergy"
@@ -99,15 +168,24 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/drug_allergy"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:background="@drawable/border"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
 
-            <EditText
+            <Spinner
                 android:id="@+id/register_elder_blood_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/blood_group"
-                android:inputType="textPersonName" />
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border" />
 
             <EditText
                 android:id="@+id/register_elder_relative_name"
@@ -115,7 +193,14 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/relative_name"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:background="@drawable/border"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
 
             <EditText
                 android:id="@+id/register_elder_relative_lastname"
@@ -123,7 +208,14 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/relative_last_name"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:background="@drawable/border"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
 
             <EditText
                 android:id="@+id/register_elder_relative_telephone"
@@ -131,19 +223,26 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/relative_telephone"
-                android:inputType="textPersonName" />
+                android:inputType="number"
+                android:background="@drawable/border"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
         </LinearLayout>
     </ScrollView>
 
     <Button
         android:id="@+id/register_elder_button_sign_up"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up"
-        android:gravity="center"
-        android:textColor="@color/White"
-        android:textSize="@dimen/font_medium"
-        android:layout_marginTop="20dp"
+        android:layout_gravity="bottom"
         android:background="@color/colorMain"
-        android:onClick="onClickRegisterElder" />
+        android:gravity="center"
+        android:onClick="onClickRegisterElder"
+        android:text="@string/sign_up"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium" />
 </LinearLayout>

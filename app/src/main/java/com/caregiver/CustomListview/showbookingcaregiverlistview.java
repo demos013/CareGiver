@@ -52,6 +52,7 @@ public class showbookingcaregiverlistview extends BaseAdapter {
     ArrayList<Care_Activity> activity;
     private Bitmap bitmap;
 
+
     public showbookingcaregiverlistview(Context mContext, ArrayList<Care_Activity> activity) {
         this.mContext = mContext;
         this.activity = activity;
@@ -114,7 +115,7 @@ public class showbookingcaregiverlistview extends BaseAdapter {
         qrCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialogConfirmActivity();
+                showDialogConfirmActivity(i);
             }
         });
 
@@ -155,13 +156,20 @@ public class showbookingcaregiverlistview extends BaseAdapter {
             }
         });
     }
-    public void showDialogConfirmActivity(){
+    public void showDialogConfirmActivity(int i){
 
         final Dialog dialog = new Dialog(mContext);
         dialog.setContentView(R.layout.dialog_qrcode);
 
         ImageView qrimage = dialog.findViewById(R.id.bigqrcode);
-        qrimage.setImageBitmap(bitmap);
+        QRGEncoder qrgEncoder = new QRGEncoder(activity.get(i).getStart_key(), null, QRGContents.Type.TEXT,400 );
+        try {
+            bitmap = qrgEncoder.encodeAsBitmap();
+            qrimage.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            Log.v(TAG, e.toString());
+        }
+
 
         dialog.show();
 

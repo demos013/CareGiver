@@ -30,4 +30,17 @@
     <string name="inbox">กล่องขาเข้า</string>
     <string name="under">ผู้สูงอายุที่อยู่ในการดูแล</string>
     <string name="more">เพิ่มเติม</string>
+
+    <string-array name="sex">
+        <item>ชาย</item>
+        <item>หญิง</item>
+    </string-array>
+
+    <string-array name="blood_group">
+        <item>เอ</item>
+        <item>บี</item>
+        <item>เอบี</item>
+        <item>โอ</item>
+    </string-array>
+
 </resources>

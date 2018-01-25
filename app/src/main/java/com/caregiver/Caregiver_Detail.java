@@ -23,12 +23,17 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.caregiver.CustomListview.reviewlistview;
 import com.caregiver.Model.Care_Activity;
 import com.caregiver.Model.Caregiver;
 import com.caregiver.Model.Request_Care_Activity;
+import com.caregiver.Model.Review;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,6 +52,7 @@ import java.io.File;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.UUID;
@@ -87,8 +93,7 @@ public class Caregiver_Detail extends AppCompatActivity {
                     //updateLocation();
                     //getCaregiverDB();
                     isBooking();
-
-
+                    getReviewDB();
 
                 } else {
                     startActivity(new Intent(Caregiver_Detail.this,Authentication.class));
@@ -297,18 +302,21 @@ public class Caregiver_Detail extends AppCompatActivity {
     public void isBooking(){
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mRequestRef = mRootRef.child("Request_Care_Activity");
-        Query query =  mRequestRef.orderByKey().equalTo(user.getUid()+caregiverDB.getUid());
+        Query query =  mRequestRef.orderByChild("caregiver_id").equalTo(caregiverDB.getUid());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Request_Care_Activity request = postSnapshot.getValue(Request_Care_Activity.class);
-                    Button bookingbt = findViewById(R.id.caregiver_detail_booking_button);
-                    bookingbt.setVisibility(View.GONE);
-                    TextView confirmkeytxt = findViewById(R.id.caregiver_detail_confirm_key);
-                    confirmkeytxt.setText(String.valueOf(request.getConfirm_key()));
-                    confirmkeytxt.setVisibility(View.VISIBLE);
-                    break;
+
+                    if(request.getElder_uid().equals(user.getUid())){
+                        Button bookingbt = findViewById(R.id.caregiver_detail_booking_button);
+                        bookingbt.setVisibility(View.GONE);
+                        TextView confirmkeytxt = findViewById(R.id.caregiver_detail_confirm_key);
+                        confirmkeytxt.setText(String.valueOf(request.getConfirm_key()));
+                        confirmkeytxt.setVisibility(View.VISIBLE);
+                        break;
+                    }
                 }
             }
 
@@ -317,6 +325,68 @@ public class Caregiver_Detail extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void getReviewDB(){
+        final ArrayList<Review> review = new ArrayList<>();
+
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mReviewRef = mRootRef.child("Review");
+
+        Query query = mReviewRef.orderByChild("caregiver_uid").equalTo(caregiverDB.getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    review.add(postSnapshot.getValue(Review.class));
+                    Log.d(review.get(0).getReview_detail(), "updateListviewReview: ");
+                }
+                updateListviewReview(review);
+                setReview(review);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void updateListviewReview(ArrayList<Review> review){
+        reviewlistview adapter = new reviewlistview(this,review);
+        ListView listView = findViewById(R.id.Caregiver_detail_listview_review);
+        listView.setAdapter(adapter);
+
+    }
+
+    public void onClickInfo(View view){
+        LinearLayout linearReview = findViewById(R.id.Review);
+        linearReview.setVisibility(View.GONE);
+        LinearLayout linearInfo = findViewById(R.id.Info);
+        linearInfo.setVisibility(View.VISIBLE);
+    }
+
+    public void onClickReview(View view){
+        LinearLayout linearReview = findViewById(R.id.Review);
+        linearReview.setVisibility(View.VISIBLE);
+        LinearLayout linearInfo = findViewById(R.id.Info);
+        linearInfo.setVisibility(View.GONE);
+    }
+
+    public void setReview(ArrayList<Review> review){
+        RatingBar ratingBar = findViewById(R.id.ratingBar);
+        float score = 0;
+        if(review.size()==0){
+            ratingBar.setRating(0);
+        }
+        else{
+            for(int i=0;i<review.size();i++){
+                score = score + review.get(i).getScore();
+            }
+            score = score/review.size();
+            ratingBar.setRating(score);
+        }
     }
 
 }
