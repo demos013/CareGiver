@@ -16,6 +16,7 @@ import com.caregiver.Model.Elder;
 import com.caregiver.Model.Request_Care_Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -127,14 +128,28 @@ public class CareGiver_in_box extends AppCompatActivity {
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mUsersRef = mRootRef.child("Request_Care_Activity");
         Query query = mUsersRef.orderByChild("caregiver_id").equalTo(user.getUid());
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Log.d("1", "updateElder: ");
                     AllRequestActivityDB.add(postSnapshot.getValue(Request_Care_Activity.class));
-                    getElderlyDB(postSnapshot.getValue(Request_Care_Activity.class).getElder_uid());
                 }
+                updateElderlyListView();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
             }
 
@@ -158,9 +173,6 @@ public class CareGiver_in_box extends AppCompatActivity {
                         Log.d("2", "updateElder: ");
                         Log.d(postSnapshot.getValue(Elder.class).getUid(), "updateElder: ");
                     }
-                    updateElderlyListView();
-
-
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
@@ -173,17 +185,22 @@ public class CareGiver_in_box extends AppCompatActivity {
 
     public void updateElderlyListView(){
         Log.d("3", "updateElder: ");
-        elderly_adapter adapter = new elderly_adapter(this,AllElderlyDB);
+        elderly_adapter adapter = new elderly_adapter(this,AllRequestActivityDB);
         ListView listView = findViewById(R.id.care_giver_in_box_listview);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(CareGiver_in_box.this,Elderly_Detail.class);
-                intent.putExtra("elderDB",AllElderlyDB.get(i));
+                intent.putExtra("request",AllRequestActivityDB.get(i));
                 startActivity(intent);
             }
         });
+    }
+
+    public void onCickBookingIntent(View view){
+        Intent intent = new Intent(CareGiver_in_box.this,Booking_List_Elderly.class);
+        startActivity(intent);
     }
 
 

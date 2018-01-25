@@ -1,35 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="275dp"
-    android:layout_height="200dp"
+    android:layout_height="125dp"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/textView10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="ยืนยันกิจกรรมการดูแล"
-        android:textSize="@dimen/font_medium" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/dialog_confirm_activity_key"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/colorMain"
-            android:hint="Confirm Key"
-            android:inputType="number"
-            android:maxLength="4" />
-    </LinearLayout>
+        android:text="เสร็จสิ้นกิจกรรมการดูแล"
+        android:textSize="@dimen/font_medium"
+        android:layout_marginTop="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +21,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/dialog_confirm_activity_ok"
+            android:id="@+id/dialog_finish_activity_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -50,7 +32,7 @@
             android:textColor="@color/White" />
 
         <Button
-            android:id="@+id/dialog_confirm_activity_cancel"
+            android:id="@+id/dialog_finish_activity_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

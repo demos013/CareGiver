@@ -7,14 +7,19 @@ package com.caregiver.Model;
 public class Review {
     private String elder_uid;
     private String caregiver_uid;
-    private Double score;
+    private float score;
     private String review_detail;
     private String date_of_view;
 
     public Review() {
+        this.elder_uid = "null";
+        this.caregiver_uid = "null";
+        this.score = 0;
+        this.review_detail = "";
+        this.date_of_view = "null";
     }
 
-    public Review(String elder_uid, String caregiver_uid, Double score, String review_detail, String date_of_view) {
+    public Review(String elder_uid, String caregiver_uid, float score, String review_detail, String date_of_view) {
         this.elder_uid = elder_uid;
         this.caregiver_uid = caregiver_uid;
         this.score = score;
@@ -38,11 +43,11 @@ public class Review {
         this.caregiver_uid = caregiver_uid;
     }
 
-    public Double getScore() {
+    public float getScore() {
         return score;
     }
 
-    public void setScore(Double score) {
+    public void setScore(float score) {
         this.score = score;
     }
 
@@ -61,4 +66,6 @@ public class Review {
     public void setDate_of_view(String date_of_view) {
         this.date_of_view = date_of_view;
     }
+
+
 }

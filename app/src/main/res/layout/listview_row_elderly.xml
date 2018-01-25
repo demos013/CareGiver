@@ -11,7 +11,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
 
-        app:srcCompat="@drawable/googleg_standard_color_18" />
+        app:srcCompat="@drawable/loading" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,17 +21,52 @@
 
         <TextView
             android:id="@+id/row_name_elderly"
-            android:layout_width="wrap_content"
-            android:layout_height="37dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Full Name" />
 
-        <TextView
-            android:id="@+id/row_decrip_elderly"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Decrip" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="วันที่" />
+
+            <TextView
+                android:id="@+id/row_date_elderly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="วันที่" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="เวลา" />
+
+            <TextView
+                android:id="@+id/row_time_elderly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="เวลา" />
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

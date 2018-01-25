@@ -1,5 +1,8 @@
 package com.caregiver;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,12 +16,17 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
+import com.caregiver.Model.Care_Activity;
 import com.caregiver.Model.Caregiver;
 import com.caregiver.Model.Request_Care_Activity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,6 +46,9 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.UUID;
 
 import io.nlopez.smartlocation.SmartLocation;
@@ -141,6 +152,7 @@ public class Caregiver_Detail extends AppCompatActivity {
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                 Bitmap bmpPic = BitmapFactory.decodeFile(file.getPath());
                 img.setImageBitmap( GetBitmapClippedCircle(bmpPic));
+                file.delete();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -152,21 +164,117 @@ public class Caregiver_Detail extends AppCompatActivity {
     }
 
     public void onBookingCaregiver (View view){
-        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference mUsersRef = mRootRef.child("Request_Care_Activity");
-        Request_Care_Activity request = new Request_Care_Activity();
-        int confirmkey = generateRandomNumber();
-        request.setCaregiver_id(caregiverDB.getUid());
-        request.setElder_uid(user.getUid());
-        request.setConfirm_key(confirmkey);
-        mUsersRef.child(user.getUid()+caregiverDB.getUid()).setValue(request);
-        Button bookingbt = findViewById(R.id.caregiver_detail_booking_button);
-        bookingbt.setVisibility(View.GONE);
-        TextView confirmkeytxt = findViewById(R.id.caregiver_detail_confirm_key);
-        confirmkeytxt.setText(String.valueOf(confirmkey));
-        confirmkeytxt.setVisibility(View.VISIBLE);
+
+        showDialogConfirmActivity(view);
 
 
+    }
+
+    public void showDialogConfirmActivity(final View view){
+        final Dialog dialog = new Dialog(Caregiver_Detail.this);
+        dialog.setContentView(R.layout.dialog_request_activity);
+
+
+        Button buttonCancel = (Button) dialog.findViewById(R.id.dialog_request_activity_cancel);
+        Button buttonAdd = (Button) dialog.findViewById(R.id.dialog_request_activity_ok);
+        final EditText dateedt = dialog.findViewById(R.id.dialog_request_activity_date);
+        dateedt.setInputType(InputType.TYPE_NULL);
+        dateedt.setTextIsSelectable(true);
+        final EditText timeedt = dialog.findViewById(R.id.dialog_request_activity_time);
+        timeedt.setInputType(InputType.TYPE_NULL);
+        timeedt.setTextIsSelectable(true);
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (!dateedt.getText().toString().equals("")&&!timeedt.getText().toString().equals("")){
+                    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                    DatabaseReference mUsersRef = mRootRef.child("Request_Care_Activity");
+                    Request_Care_Activity request = new Request_Care_Activity();
+                    int confirmkey = generateRandomNumber();
+                    request.setCaregiver_id(caregiverDB.getUid());
+                    request.setElder_uid(user.getUid());
+                    request.setConfirm_key(confirmkey);
+                    request.setStart_date(dateedt.getText().toString());
+                    request.setStart_time(timeedt.getText().toString());
+                    mUsersRef.child(user.getUid()+caregiverDB.getUid()).setValue(request);
+                    Button bookingbt = findViewById(R.id.caregiver_detail_booking_button);
+                    bookingbt.setVisibility(View.GONE);
+                    TextView confirmkeytxt = findViewById(R.id.caregiver_detail_confirm_key);
+                    confirmkeytxt.setText(String.valueOf(confirmkey));
+                    confirmkeytxt.setVisibility(View.VISIBLE);
+                    dialog.dismiss();
+                    Log.d("noterroe", "onClick: ");
+                }
+                else{
+                    Log.d("error", "onClick: ");
+                    if(dateedt.getText().toString().equals("")){
+                        dateedt.setError("กรุณาใส่วันที่ต้องการทำจองกิจกรรมการดูแล");
+                    }
+                    if(timeedt.getText().toString().equals("")){
+                        timeedt.setError("กรุณาใส่เวลาต้องการทำจองกิจกรรมการดูแล");
+                    }
+                }
+
+
+
+            }
+        });
+
+        //date picker
+        final Calendar myCalendar = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                String myFormat = "dd/MM/yyyy"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                dateedt.setText(sdf.format(myCalendar.getTime()));
+            }
+
+        };
+        dateedt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(Caregiver_Detail.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+
+
+        });
+        //time picker
+        timeedt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(Caregiver_Detail.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+
+                        timeedt.setText( selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+            }
+        });
+
+
+        dialog.show();
 
     }
 

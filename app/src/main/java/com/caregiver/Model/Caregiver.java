@@ -20,6 +20,7 @@ public class Caregiver  implements Serializable {
     private String carecenter_id;
     private Location location;
 
+
     public Caregiver() {
         this.mobile_number = "null";
         this.uid = "null";

@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.caregiver.CareGiver_in_box">
-
+    tools:context="com.caregiver.Booking_List_Elderly"
+    android:orientation="vertical">
 
     <ListView
-        android:id="@+id/care_giver_in_box_listview"
+        android:id="@+id/booking_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
@@ -25,10 +24,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="@string/inbox"
+            android:onClick="onCickInBoxIntent"
             android:background="@color/colorMain"
             android:textColor="@color/White"
-            android:textSize="@dimen/font_medium"
-            android:text="@string/inbox" />
+            android:textSize="@dimen/font_medium"/>
 
         <Button
             android:id="@+id/caregiver_under"
@@ -36,8 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/under"
-            android:onClick="onCickBookingIntent"
-            android:background="@color/colorAccent"
+            android:background="@color/colorMain"
             android:textColor="@color/White"
             android:textSize="@dimen/font_medium"/>
 
@@ -46,12 +45,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="signout"
             android:text="@string/more"
             android:background="@color/colorMain"
             android:textColor="@color/White"
             android:textSize="@dimen/font_medium"/>
 
     </LinearLayout>
-
 </LinearLayout>

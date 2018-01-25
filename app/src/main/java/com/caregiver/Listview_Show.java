@@ -38,7 +38,7 @@ public class Listview_Show extends AppCompatActivity {
     private Elder elderDB;
     private ArrayList<Caregiver> AllCaregiverDB;
 
-    private String[] mDrawerTitle = {"Add Name","Home","Hidden", "My Buddy", "Buddy Requests", "Sign out"};
+    private String[] mDrawerTitle = {"รายการจอง", "Sign out"};
     private ActionBarDrawerToggle mDrawerToggle;
     private android.support.v7.widget.Toolbar toolbar;
 
@@ -85,12 +85,6 @@ public class Listview_Show extends AppCompatActivity {
                 .stop();
     }
 
-    public void signout(View view){
-        mAuth.signOut();
-    }
-
-
-
 
     public void setupNavigationBar(){
         //navigationbar
@@ -103,6 +97,14 @@ public class Listview_Show extends AppCompatActivity {
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
+                if(arg2==0){
+                    Intent intent = new Intent(Listview_Show.this,Booking_List_Caregiver.class);
+                    startActivity(intent);
+
+                }
+                if(arg2==1){
+                    mAuth.signOut();
+                }
 
 
             }
@@ -162,7 +164,7 @@ public class Listview_Show extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
-         menu.getItem(1).setIcon(R.drawable.view_list);
+         menu.getItem(1).setIcon(R.drawable.location_map);
         return true;
     }
 
@@ -171,7 +173,7 @@ public class Listview_Show extends AppCompatActivity {
 
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mUsersRef = mRootRef.child("Caregiver");
-        Query query = mUsersRef.orderByKey().limitToFirst(2);
+        Query query = mUsersRef.orderByKey();
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

@@ -97,6 +97,7 @@ public class showcaregiverlistview extends BaseAdapter {
                 Bitmap bmpPic = BitmapFactory.decodeFile(file.getPath());
                 bmpPic = Bitmap.createScaledBitmap(bmpPic, 200, 150, true);
                 img.setImageBitmap(bmpPic);
+                file.delete();
 
             }
         }).addOnFailureListener(new OnFailureListener() {

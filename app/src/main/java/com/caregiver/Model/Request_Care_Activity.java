@@ -1,13 +1,17 @@
 package com.caregiver.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by Demos on 1/14/2018.
  */
 
-public class Request_Care_Activity {
+public class Request_Care_Activity implements Serializable {
     private String elder_uid;
     private String caregiver_id;
     private int confirm_key;
+    private String start_date;
+    private String start_time;
 
     public Request_Care_Activity() {
     }
@@ -40,5 +44,21 @@ public class Request_Care_Activity {
 
     public void setConfirm_key(int confirm_key) {
         this.confirm_key = confirm_key;
+    }
+
+    public String getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
+    }
+
+    public String getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
     }
 }

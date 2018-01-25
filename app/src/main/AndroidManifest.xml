@@ -44,7 +44,14 @@
         <activity android:name=".CareGiver_in_box" />
         <activity android:name=".Caregiver_Detail" />
         <activity android:name=".Elderly_Detail" />
-        <activity android:name=".Create_Care_Activity"></activity>
+        <activity android:name=".Create_Care_Activity" />
+        <activity android:name=".Booking_List_Caregiver" />
+        <activity android:name=".Booking_List_Elderly" />
+        <activity
+            android:name=".Booking_Elderly_Detail"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".QRCodeScaner" />
+        <activity android:name=".Rating"></activity>
     </application>
 
 </manifest>

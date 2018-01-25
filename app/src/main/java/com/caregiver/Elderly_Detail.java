@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -65,10 +66,7 @@ public class Elderly_Detail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elderly__detail);
-        elderDB = (Elder) getIntent().getSerializableExtra("elderDB");
-        ImageView img = findViewById(R.id.elderly_detail_display);
-        downloadInLocalFile(img,elderDB);
-
+        request = (Request_Care_Activity) getIntent().getSerializableExtra("request");
 
     }
 
@@ -82,7 +80,7 @@ public class Elderly_Detail extends AppCompatActivity {
                 user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     //setupNavigationBar();
-                    getRequestActivity();
+                    getElderDB();
 
 
 
@@ -148,6 +146,7 @@ public class Elderly_Detail extends AppCompatActivity {
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                 Bitmap bmpPic = BitmapFactory.decodeFile(file.getPath());
                 img.setImageBitmap( GetBitmapClippedCircle(bmpPic));
+                file.delete();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -179,12 +178,7 @@ public class Elderly_Detail extends AppCompatActivity {
 
         Button buttonCancel = (Button) dialog.findViewById(R.id.dialog_confirm_activity_cancel);
         Button buttonAdd = (Button) dialog.findViewById(R.id.dialog_confirm_activity_ok);
-        final EditText dateedt = dialog.findViewById(R.id.dialog_confirm_activity_date);
-        dateedt.setInputType(InputType.TYPE_NULL);
-        dateedt.setTextIsSelectable(true);
-        final EditText timeedt = dialog.findViewById(R.id.dialog_confirm_activity_time);
-        timeedt.setInputType(InputType.TYPE_NULL);
-        timeedt.setTextIsSelectable(true);
+
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -201,14 +195,15 @@ public class Elderly_Detail extends AppCompatActivity {
                     activity.setCaregiver_uid(user.getUid());
                     activity.setElder_uid(elderDB.getUid());
                     activity.setConfirm_key(String.valueOf(request.getConfirm_key()));
-                    activity.setStart_date(dateedt.getText().toString());
-                    activity.setStart_time(timeedt.getText().toString());
+                    activity.setStart_date(request.getStart_date());
+                    activity.setStart_time(request.getStart_time());
                     activity.setStart_key(generateRandomNumber());
                     mCareActivity.child(elderDB.getUid()+user.getUid()).setValue(activity);
-
                     DatabaseReference mRequestActivity = mRootRef.child("Request_Care_Activity");
                     mRequestActivity.child(elderDB.getUid()+user.getUid()).removeValue();
                     dialog.dismiss();
+                    Intent intent = new Intent(Elderly_Detail.this, CareGiver_in_box.class);
+                    startActivity(intent);
 
                 }
                 else{
@@ -217,73 +212,47 @@ public class Elderly_Detail extends AppCompatActivity {
             }
         });
 
-        //date picker
-        final Calendar myCalendar = Calendar.getInstance();
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                String myFormat = "dd/MM/yy"; //In which you need put here
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                dateedt.setText(sdf.format(myCalendar.getTime()));
-            }
-
-        };
-        dateedt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new DatePickerDialog(Elderly_Detail.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-
-
-        });
-        //time picker
-        timeedt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
-                TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(Elderly_Detail.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        timeedt.setText( selectedHour + ":" + selectedMinute);
-                    }
-                }, hour, minute, true);//Yes 24 hour time
-                mTimePicker.setTitle("Select Time");
-
-                mTimePicker.show();
-            }
-        });
-
-
         dialog.show();
 
     }
 
-    public void getRequestActivity(){
-        request = new Request_Care_Activity();
+    public void getElderDB(){
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference mUsersRef = mRootRef.child("Request_Care_Activity");
-        Query query = mUsersRef.orderByKey().equalTo(elderDB.getUid()+user.getUid());
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference mUsersRef = mRootRef.child("Elder");
+        mUsersRef.child(request.getElder_uid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    request = postSnapshot.getValue(Request_Care_Activity.class);
-                }
+                elderDB = dataSnapshot.getValue(Elder.class);
+                ImageView img = findViewById(R.id.elderly_detail_display);
+                downloadInLocalFile(img,elderDB);
+                TextView nametxt = findViewById(R.id.elderly_datail_name);
+                TextView agetxt = findViewById(R.id.elderly_detail_age);
+                TextView sextxt = findViewById(R.id.elderly_detail_sex);
+                TextView bloodtxt = findViewById(R.id.elderly_detail_blood);
+                TextView jobtxt = findViewById(R.id.elderly_detail_job);
+                TextView drugtxt = findViewById(R.id.elderly_detail_drug_allergy);
+                TextView datetxt = findViewById(R.id.elderly_detail_date);
+                TextView timetxt = findViewById(R.id.elderly_detail_time);
+                nametxt.setText("คุณ "+elderDB.getName()+" "+elderDB.getLastname());
+                String tmp = elderDB.getDate_of_birth();
+                String[] split = tmp.split("/");
+                int age = Calendar.getInstance().get(Calendar.YEAR)-Integer.valueOf(split[2]);
+                agetxt.append(String.valueOf(age)+" ปี");
+                sextxt.append(elderDB.getSex());
+                bloodtxt.append(elderDB.getBlood_group());
+                jobtxt.append(elderDB.getJob());
+                drugtxt.append(elderDB.getDrug_allergy());
+                datetxt.append(request.getStart_date());
+                timetxt.append(request.getStart_time()+" นาฬิกา");
+
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
+
             }
         });
+
     }
 
     public String generateRandomNumber() {

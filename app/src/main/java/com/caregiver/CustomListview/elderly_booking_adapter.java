@@ -1,13 +1,10 @@
 package com.caregiver.CustomListview;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.caregiver.Model.Caregiver;
+import com.caregiver.Model.Care_Activity;
 import com.caregiver.Model.Elder;
 import com.caregiver.Model.Request_Care_Activity;
 import com.caregiver.R;
@@ -36,36 +33,35 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * Created by pndpndpndpnd on 1/18/2018.
+ * Created by Demos on 1/24/2018.
  */
 
-public class elderly_adapter extends BaseAdapter {
+public class elderly_booking_adapter extends BaseAdapter {
 
     Context mContext;
-    ArrayList<Request_Care_Activity> AllRequestActivityDB;
+    ArrayList<Care_Activity> AllActivityDB;
     Elder elderDB;
 
-    public elderly_adapter(Context mContext, ArrayList<Request_Care_Activity> AllRequestActivityDB) {
+    public elderly_booking_adapter(Context mContext, ArrayList<Care_Activity> allActivityDB) {
         this.mContext = mContext;
-        this.AllRequestActivityDB = AllRequestActivityDB;
+        AllActivityDB = allActivityDB;
     }
 
     @Override
     public int getCount() {
-        return AllRequestActivityDB.size();
+        return AllActivityDB.size();
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(int i) {
         return null;
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(int i) {
         return 0;
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         LayoutInflater mInflater =
@@ -80,14 +76,14 @@ public class elderly_adapter extends BaseAdapter {
 
         final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mElder = mRootRef.child("Elder");
-        mElder.child(AllRequestActivityDB.get(i).getElder_uid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        mElder.child(AllActivityDB.get(i).getElder_uid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 elderDB = dataSnapshot.getValue(Elder.class);
                 downloadInLocalFile(img, elderDB);
                 caregiver_name.setText(elderDB.getName()+" "+elderDB.getLastname());
-                caregiver_date.setText(AllRequestActivityDB.get(i).getStart_date());
-                caregiver_time.setText(AllRequestActivityDB.get(i).getStart_time());
+                caregiver_date.setText(AllActivityDB.get(i).getStart_date());
+                caregiver_time.setText(AllActivityDB.get(i).getStart_time());
             }
 
             @Override
@@ -96,9 +92,6 @@ public class elderly_adapter extends BaseAdapter {
             }
         });
 
-
-
-        
         return view;
     }
 
@@ -117,8 +110,6 @@ public class elderly_adapter extends BaseAdapter {
         }
 
         final FileDownloadTask fileDownloadTask = imageRef.getFile(file);
-
-
         fileDownloadTask.addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
