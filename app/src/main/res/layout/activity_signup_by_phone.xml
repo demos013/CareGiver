@@ -21,7 +21,7 @@
             android:ems="10"
             android:hint="@string/insert_phone_number"
             android:inputType="phone"
-            android:text="+66643122710" />
+            />
 
         <Button
             android:id="@+id/sign_up_by_phone_button_get_otp"
@@ -41,24 +41,25 @@
         android:orientation="vertical"
         android:layout_marginTop="60px">
 
-        <com.chaos.view.PinView
-            android:id="@+id/sign_up_by_phone_pin_OTP"
-            style="@style/PinWidget.PinView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:inputType="number"
-            android:padding="5dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            app:itemCount="6"
-            app:itemHeight="48dp"
-            app:itemRadius="4dp"
-            app:itemSpacing="0dp"
-            app:itemWidth="36dp"
-            app:lineColor="@color/colorPrimary"
-            app:lineWidth="2dp"
-            app:viewType="rectangle" />
+        <!-- <com.chaos.view.PinView
+
+             android:id="@+id/sign_up_by_phone_pin_OTP"
+             style="@style/PinWidget.PinView"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:hint=""
+             android:inputType="number"
+             android:padding="5dp"
+             android:textColor="@color/colorPrimaryDark"
+             android:textSize="18sp"
+             app:itemCount="6"
+             app:itemHeight="48dp"
+             app:itemRadius="4dp"
+             app:itemSpacing="0dp"
+             app:itemWidth="36dp"
+             app:lineColor="@color/colorPrimary"
+             app:lineWidth="2dp"
+             app:viewType="rectangle" /> -->
 
         <Button
             android:id="@+id/sign_up_by_phone_button_confirm_otp"

@@ -1,9 +1,6 @@
 package com.caregiver;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.location.Location;
-import android.support.annotation.DrawableRes;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,10 +14,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.caregiver.CustomListview.navigationlistview;
+import com.caregiver.CustomListview.showbookingcaregiverlistview;
+import com.caregiver.CustomListview.showcaregiverlistview;
 import com.caregiver.Model.Care_Activity;
-import com.caregiver.Model.Elder;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
+import com.caregiver.Model.Caregiver;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,29 +28,24 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
-import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
-import io.nlopez.smartlocation.location.config.LocationParams;
 
-public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
-
+public class Booking_List_Caregiver extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     FirebaseUser user;
-    private Elder elderDB;
+    private ArrayList<Care_Activity> AllActivityDB;
 
     private String[] mDrawerTitle = {"รายการจอง", "Sign out"};
     private ActionBarDrawerToggle mDrawerToggle;
     private android.support.v7.widget.Toolbar toolbar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+        setContentView(R.layout.activity_booking__list_caregiver);
+        AllActivityDB = new ArrayList<>();
     }
 
     @Override
@@ -65,13 +57,12 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
             public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
                 user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    getUserDB(user.getUid());
+                    getBookingActivity();
                     setupNavigationBar();
-                    updateLocation();
-                    getActivityReview();
+
 
                 } else {
-                    startActivity(new Intent(Map_Show.this,Authentication.class));
+                    startActivity(new Intent(Booking_List_Caregiver.this,Authentication.class));
                 }
                 // ...
             }
@@ -86,24 +77,8 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
             mAuth.removeAuthStateListener(mAuthListener);
         }
 
-        SmartLocation.with(this)
-                .location()
-                .stop();
     }
 
-    public void signout(View view){
-        mAuth.signOut();
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 
     public void setupNavigationBar(){
         //navigationbar
@@ -116,10 +91,8 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
-
                 if(arg2==0){
-                    Intent intent = new Intent(Map_Show.this,Booking_List_Caregiver.class);
-                    startActivity(intent);
+
                 }
                 if(arg2==1){
                     mAuth.signOut();
@@ -129,9 +102,7 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
             }
         });
 
-
         //toggle
-
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -158,9 +129,10 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
         };
 
         mDrawerLayout.addDrawerListener(mDrawerToggle);
+
+
     }
 
-    @SuppressLint("RestrictedApi")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
@@ -168,11 +140,12 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
         }
         switch (item.getItemId()) {
             case R.id.location_map:
-                Intent intent = new Intent(Map_Show.this,Listview_Show.class);
+                Intent intent = new Intent(Booking_List_Caregiver.this,Map_Show.class);
                 startActivity(intent);
                 return true;
             case R.id.filter:
-                Log.d("filter", "onOptionsItemSelected: ");
+                intent = new Intent(Booking_List_Caregiver.this,Listview_Show.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -184,48 +157,14 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
+        menu.getItem(0).setIcon(R.drawable.view_list);
+        menu.getItem(1).setIcon(R.drawable.location_map);
+
         return true;
     }
 
-    public void updateLocation(){
-        if(SmartLocation.with(this).location().state().locationServicesEnabled()) {
-            SmartLocation.with(this)
-                    .location()
-                    .config(LocationParams.LAZY)
-                    .start(new OnLocationUpdatedListener() {
-                        @Override
-                        public void onLocationUpdated(Location location) {
-                            DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-                            DatabaseReference mUsersRef = mRootRef.child("Elder").child(user.getUid());
-                            Map<String,Object> newLocation = new HashMap<>();
-                            newLocation.put("location",new com.caregiver.Model.Location(location.getLatitude(),location.getLongitude()));
-                            mUsersRef.updateChildren(newLocation);
-                        }
-                    });
-        } else {
-            //do someting
-        }
-    }
 
-    public void getUserDB(String uid){
-        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference mUsersRef = mRootRef.child("Elder").child(uid);
-        mUsersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-               elderDB =  dataSnapshot.getValue(Elder.class);
-                Log.d(elderDB.getUid(), "onDataChange: ");
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-
-    public void getActivityReview(){
-
+    public void getBookingActivity(){
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mBookingActivityRef = mRootRef.child("Care_Activity");
         Query query = mBookingActivityRef.orderByChild("elder_uid").equalTo(user.getUid());
@@ -233,20 +172,30 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    if(postSnapshot.getValue(Care_Activity.class).getFinish_check()){
-                        Intent intent = new Intent(Map_Show.this,Rating.class);
-                        intent.putExtra("activity",postSnapshot.getValue(Care_Activity.class));
-                        startActivity(intent);
-                    }
+                    AllActivityDB.add(postSnapshot.getValue(Care_Activity.class));
+                    Log.d((postSnapshot.getValue(Care_Activity.class)).getElder_uid(), "onDataChange: ");
                 }
+
+                updateCaregiverListView();
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
     }
 
+    public void updateCaregiverListView(){
+        showbookingcaregiverlistview adapter = new showbookingcaregiverlistview(this,AllActivityDB);
+        ListView listView = findViewById(R.id.show_booking_caregiver_listview);
+        listView.setAdapter(adapter);
+        Log.d("sad", "updateCaregiverListView: ");
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+            }
+        });
+    }
 }

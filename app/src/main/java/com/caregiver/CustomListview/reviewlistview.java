@@ -1,12 +1,12 @@
 package com.caregiver.CustomListview;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Path;
 import android.os.Environment;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +15,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.caregiver.Model.Caregiver;
 import com.caregiver.Model.Elder;
-import com.caregiver.Model.Request_Care_Activity;
+import com.caregiver.Model.Review;
 import com.caregiver.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,63 +35,57 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * Created by pndpndpndpnd on 1/18/2018.
+ * Created by Demos on 1/25/2018.
  */
 
-public class elderly_adapter extends BaseAdapter {
+public class reviewlistview extends BaseAdapter {
 
-    Context mContext;
-    ArrayList<Request_Care_Activity> AllRequestActivityDB;
     Elder elderDB;
+    Context mContext;
+    ArrayList<Review> review;
 
-    public elderly_adapter(Context mContext, ArrayList<Request_Care_Activity> AllRequestActivityDB) {
+    public reviewlistview(Context mContext, ArrayList<Review> review) {
         this.mContext = mContext;
-        this.AllRequestActivityDB = AllRequestActivityDB;
+        this.review = review;
+        elderDB = new Elder();
     }
 
     @Override
     public int getCount() {
-        return AllRequestActivityDB.size();
+        return review.size();
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(int i) {
         return null;
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(int i) {
         return 0;
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
-<<<<<<< HEAD
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        return null;
-=======
-    public View getView(final int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater mInflater =
                 (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if(view == null)
-            view = mInflater.inflate(R.layout.listview_row_elderly, viewGroup, false);
+            view = mInflater.inflate(R.layout.listview_row_review, viewGroup, false);
+        TextView review_detail = view.findViewById(R.id.row_review_detail);
+        final TextView review_name = view.findViewById(R.id.row_review_name);
+        final ImageView review_display = view.findViewById(R.id.row_review_display);
+        Log.d(review.get(i).getReview_detail(), "getView: ");
+        review_detail.setText(review.get(i).getReview_detail());
 
-        final ImageView img = view.findViewById(R.id.row_image_elderly);
-        final TextView caregiver_name = view.findViewById(R.id.row_name_elderly);
-        final TextView caregiver_date = view.findViewById(R.id.row_date_elderly);
-        final TextView caregiver_time = view.findViewById(R.id.row_time_elderly);
-
-        final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference mElder = mRootRef.child("Elder");
-        mElder.child(AllRequestActivityDB.get(i).getElder_uid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mElderRef = mRootRef.child("Elder").child(review.get(i).getElder_uid());
+        mElderRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                elderDB = dataSnapshot.getValue(Elder.class);
-                downloadInLocalFile(img, elderDB);
-                caregiver_name.setText(elderDB.getName()+" "+elderDB.getLastname());
-                caregiver_date.setText(AllRequestActivityDB.get(i).getStart_date());
-                caregiver_time.setText(AllRequestActivityDB.get(i).getStart_time());
+
+                review_name.setText(dataSnapshot.getValue(Elder.class).getName()+" "+dataSnapshot.getValue(Elder.class).getLastname());
+
+                downloadInLocalFile(review_display,dataSnapshot.getValue(Elder.class));
             }
 
             @Override
@@ -101,11 +94,32 @@ public class elderly_adapter extends BaseAdapter {
             }
         });
 
+        TextView review_date = view.findViewById(R.id.row_review_date);
+        review_date.setText(review.get(i).getDate_of_view());
 
 
-        
+
+
         return view;
->>>>>>> f7db4654288c5e377ccdf09b3b4bff1939aa1a42
+    }
+
+    public static Bitmap GetBitmapClippedCircle(Bitmap bitmap) {
+
+        final int width = bitmap.getWidth();
+        final int height = bitmap.getHeight();
+        final Bitmap outputBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+        final Path path = new Path();
+        path.addCircle(
+                (float)(width / 2)
+                , (float)(height / 2)
+                , (float) Math.min(width, (height / 2))
+                , Path.Direction.CCW);
+
+        final Canvas canvas = new Canvas(outputBitmap);
+        canvas.clipPath(path);
+        canvas.drawBitmap(bitmap, 0, 0, null);
+        return outputBitmap;
     }
 
     private void downloadInLocalFile(final ImageView img, Elder elderDB) {
@@ -129,8 +143,7 @@ public class elderly_adapter extends BaseAdapter {
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                 Bitmap bmpPic = BitmapFactory.decodeFile(file.getPath());
-                bmpPic = Bitmap.createScaledBitmap(bmpPic, 200, 150, true);
-                img.setImageBitmap(bmpPic);
+                img.setImageBitmap( GetBitmapClippedCircle(bmpPic));
                 file.delete();
 
             }

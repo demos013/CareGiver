@@ -5,10 +5,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 
-import com.chaos.view.PinView;
+//import com.chaos.view.PinView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -29,24 +30,34 @@ public class Signup_by_phone extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private FirebaseAuth mAuth;
     private Boolean isElder;
-    private boolean isSignIn;
+    private Boolean isSignIn;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_by_phone);
         mAuth = FirebaseAuth.getInstance();
-        isElder = getIntent().getBooleanExtra("iselder",true);
+        isElder = getIntent().getBooleanExtra("isElder",false);
         isSignIn = getIntent().getBooleanExtra("isSignIn", false);
 
-
+        EditText phoneedt = findViewById(R.id.sign_up_by_phone_telephone_number);
 
 
     }
 
     public void onSubmit(View view){
-        EditText phoneedt = findViewById(R.id.sign_up_by_phone_button_get_otp);
-        sendCode(phoneedt.getText().toString());
+        EditText phoneedt = findViewById(R.id.sign_up_by_phone_telephone_number);
+        String phonenumber = phoneedt.getText().toString();
+        if(phonenumber.charAt(1)=='6'){
+            StringBuilder sb = new StringBuilder(phonenumber);
+            sb.deleteCharAt(0);
+            phonenumber = sb.toString();
+            phonenumber = "+66"+phonenumber;
+        }
+
+        sendCode(phonenumber);
     }
 
     public void sendCode(String phone){
@@ -98,10 +109,10 @@ public class Signup_by_phone extends AppCompatActivity {
     }
 
     public void verify(View view){
-        PinView pinView = (PinView) findViewById(R.id.sign_up_by_phone_pin_OTP);
+        //PinView pinView = (PinView) findViewById(R.id.sign_up_by_phone_pin_OTP);
 
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, pinView.getText().toString());
-        signInWithPhoneAuthCredential(credential);
+        //PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, pinView.getText().toString());
+        //signInWithPhoneAuthCredential(credential);
     }
 
 
@@ -112,14 +123,20 @@ public class Signup_by_phone extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            PinView pinView = (PinView) findViewById(R.id.sign_up_by_phone_pin_OTP);
-                            pinView.setText(credential.getSmsCode());
+                            /*PinView pinView = (PinView) findViewById(R.id.sign_up_by_phone_pin_OTP);
+                            pinView.setText(credential.getSmsCode());*/
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("success", "signInWithCredential:success");
                             FirebaseUser user = task.getResult().getUser();
                             if(isSignIn){
-                                Intent intent = new Intent(Signup_by_phone.this , Map_Show.class);
-                                startActivity(intent);
+                                if(isElder){
+                                    Intent intent = new Intent(Signup_by_phone.this , Map_Show.class);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    Intent intent = new Intent(Signup_by_phone.this , CareGiver_in_box.class);
+                                    startActivity(intent);
+                                }
                             }
                             else{
                                 if(isElder){

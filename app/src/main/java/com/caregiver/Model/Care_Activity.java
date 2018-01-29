@@ -1,21 +1,36 @@
 package com.caregiver.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by Demos on 1/14/2018.
  */
 
-public class Care_Activity {
+public class Care_Activity implements Serializable{
     private String elder_uid;
     private String caregiver_uid;
     private String start_key;
     private String confirm_key;
     private String start_date;
     private String start_time;
+    private Boolean start_check;
+    private String finish_date;
     private String finish_time;
     private Boolean finish_check;
     private String activity_detail;
 
     public Care_Activity() {
+        this.elder_uid = "null";
+        this.caregiver_uid = "null";
+        this.start_key = "null";
+        this.confirm_key = "null";
+        this.start_date = "null";
+        this.start_time = "null";
+        this.finish_date = "null";
+        this.finish_time = "null";
+        this.finish_check = false;
+        this.activity_detail = "";
+        start_check = false;
     }
 
     public Care_Activity(String elder_uid, String caregiver_uid, String start_key, String confirm_key, String start_date, String start_time, String finish_time, Boolean finish_check, String activity_detail) {
@@ -28,6 +43,7 @@ public class Care_Activity {
         this.finish_time = finish_time;
         this.finish_check = finish_check;
         this.activity_detail = activity_detail;
+
     }
 
     public String getElder_uid() {
@@ -100,5 +116,23 @@ public class Care_Activity {
 
     public void setActivity_detail(String activity_detail) {
         this.activity_detail = activity_detail;
+    }
+
+    public Boolean getStart_check() {
+        return start_check;
+    }
+
+    public Care_Activity setStart_check(Boolean start_check) {
+        this.start_check = start_check;
+        return this;
+    }
+
+    public String getFinish_date() {
+        return finish_date;
+    }
+
+    public Care_Activity setFinish_date(String finish_date) {
+        this.finish_date = finish_date;
+        return this;
     }
 }

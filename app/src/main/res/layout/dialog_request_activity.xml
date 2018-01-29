@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="275dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="จองกิจกรรทการดูแล"
+        android:textSize="@dimen/font_medium" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/dialog_request_activity_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/colorMain"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="วันที่"
+            android:inputType="none"
+            android:textIsSelectable="true" />
+
+        <EditText
+            android:id="@+id/dialog_request_activity_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/colorMain"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="เวลา"
+            android:inputType="none"
+            android:textIsSelectable="true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialog_request_activity_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorMain"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="OK"
+            android:textColor="@color/White" />
+
+        <Button
+            android:id="@+id/dialog_request_activity_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@color/colorMain"
+            android:padding="16dp"
+            android:text="Cancel"
+            android:textColor="@color/White" />
+
+    </LinearLayout>
+</LinearLayout>

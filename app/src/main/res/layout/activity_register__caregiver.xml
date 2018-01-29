@@ -72,14 +72,6 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/register_caregiver_job"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="วันเดือนปีเกิด"
-                android:inputType="textPersonName" />
-
-            <EditText
                 android:id="@+id/register_caregiver_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

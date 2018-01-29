@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.caregiver.Map_Show"
+    tools:context="com.caregiver.Booking_List_Caregiver"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -17,16 +18,13 @@
             android:layout_weight="1"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" >
+            android:theme="?attr/actionBarTheme">
 
 
         </android.support.v7.widget.Toolbar>
 
 
-
     </android.support.design.widget.AppBarLayout>
-
-
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
@@ -36,7 +34,7 @@
 
         <!-- Content -->
         <FrameLayout
-            android:id="@+id/map_container"
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -45,13 +43,11 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <fragment
-                    android:id="@+id/map_map"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                <ListView
+                    android:id="@+id/show_booking_caregiver_listview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="match_parent" />
 
-                    tools:context=".MapsActivity" />
             </LinearLayout>
 
         </FrameLayout>
@@ -67,5 +63,4 @@
 
         <!-- Navigation drawer -->
     </android.support.v4.widget.DrawerLayout>
-
 </LinearLayout>

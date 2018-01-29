@@ -6,4 +6,7 @@
     <color name="colorMain">#08AE9E</color>
     <color name="White">#ffffff</color>
     <color name="colorpress">#0e544e</color>
+    <color name="Grey">#dadada</color>
+    <color name="Black">#1a1919</color>
+
 </resources>

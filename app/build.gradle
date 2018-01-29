@@ -29,14 +29,21 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
     implementation 'com.google.android.gms:play-services-location:11.8.0'
+    implementation 'com.google.android.gms:play-services-vision:11.8.0'
     compile 'com.google.firebase:firebase-storage:11.8.0'
     compile 'com.google.firebase:firebase-database:11.8.0'
     compile 'com.google.firebase:firebase-core:11.8.0'
     compile 'com.google.firebase:firebase-auth:11.8.0'
-    compile 'com.chaos.view:pinview:1.2.0'
-    compile('io.nlopez.smartlocation:library:3.3.3') {
+    compile 'androidmads.library.qrgenearator:QRGenearator:1.0.3'
+    compile 'me.dm7.barcodescanner:zxing:1.9.8'
+    compile 'com.github.nisrulz:qreader:2.1.2'
 
+
+    compile('io.nlopez.smartlocation:library:3.3.3') {
     }
+
+    // barcode reader
+    implementation 'info.androidhive:barcode-reader:1.1.5'
 
 
 }

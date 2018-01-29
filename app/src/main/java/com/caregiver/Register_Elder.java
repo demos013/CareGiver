@@ -1,5 +1,6 @@
 package com.caregiver;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -8,7 +9,11 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.caregiver.Model.Elder;
 import com.caregiver.Model.Location;
@@ -16,6 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class Register_Elder extends AppCompatActivity {
 
@@ -23,6 +31,8 @@ public class Register_Elder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register__elder);
+
+        setOnClickAllEditText();
 
 
     }
@@ -48,16 +58,16 @@ public class Register_Elder extends AppCompatActivity {
         elderDB.setTelephone(edttemp.getText().toString());
         edttemp = findViewById(R.id.register_elder_drug_allergy);
         elderDB.setDrug_allergy(edttemp.getText().toString());
-        edttemp = findViewById(R.id.register_elder_blood_group);
-        elderDB.setBlood_group(edttemp.getText().toString());
+        Spinner mBloodSpiner = (Spinner) findViewById(R.id.register_elder_blood_group);
+        elderDB.setBlood_group(mBloodSpiner.getSelectedItem().toString());
+        Spinner mSexSpiner = (Spinner) findViewById(R.id.register_elder_sex);
+        elderDB.setBlood_group(mSexSpiner.getSelectedItem().toString());
         edttemp = findViewById(R.id.register_elder_relative_name);
         elderDB.setRelative_name(edttemp.getText().toString());
         edttemp = findViewById(R.id.register_elder_relative_lastname);
         elderDB.setRelative_lastname(edttemp.getText().toString());
         edttemp = findViewById(R.id.register_elder_relative_telephone);
         elderDB.setRelative_mobile_number(edttemp.getText().toString());
-
-
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mUsersRef = mRootRef.child("Elder");
         mUsersRef.child(elderDB.getUid()).setValue(elderDB);
@@ -71,6 +81,54 @@ public class Register_Elder extends AppCompatActivity {
                 INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         return true;
+    }
+
+    public void setOnClickAllEditText(){
+        final EditText edttemp = findViewById(R.id.register_elder_date_of_birth);
+        edttemp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar myCalendar = Calendar.getInstance();
+                final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, monthOfYear);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        String myFormat = "dd/MM/yyyy"; //In which you need put here
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                        edttemp.setText(sdf.format(myCalendar.getTime()));
+                    }
+
+                };
+                edttemp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new DatePickerDialog(Register_Elder.this, date, myCalendar
+                                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                    }
+
+
+                });
+            }
+        });
+
+
+        Spinner mSexSpiner = (Spinner) findViewById(R.id.register_elder_sex);
+        String[] sex = getResources().getStringArray(R.array.sex);
+        ArrayAdapter<String> adapterSex = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, sex);
+        mSexSpiner.setAdapter(adapterSex);
+
+        Spinner mBloodSpiner = (Spinner) findViewById(R.id.register_elder_blood_group);
+        String[] blood = getResources().getStringArray(R.array.blood_group);
+        ArrayAdapter<String> adapterBlood = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, blood);
+        mBloodSpiner.setAdapter(adapterSex);
+
     }
 
 

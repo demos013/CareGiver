@@ -102,7 +102,7 @@ public class Update_Profile_Elder extends AppCompatActivity {
             try {
                 Bitmap bmpPic = BitmapFactory.decodeFile(filePath.replace("file://", ""));
                 FileOutputStream bmpFile = new FileOutputStream(filePath.replace("file://", ""));
-                bmpPic = Bitmap.createScaledBitmap(bmpPic, 600, 400, true);
+                bmpPic = Bitmap.createScaledBitmap(bmpPic, 400, 400, true);
                 Matrix mat = new Matrix();
                 mat.postRotate(270);
                 bmpPic = Bitmap.createBitmap(bmpPic, 0, 0, bmpPic.getWidth(), bmpPic.getHeight(), mat, true);
@@ -129,7 +129,7 @@ public class Update_Profile_Elder extends AppCompatActivity {
                 Log.d("imgDecodableString",imgDecodableString);
                 filePath ="file://"+imgDecodableString;
                 Bitmap bmpPic = BitmapFactory.decodeFile(imgDecodableString);
-                bmpPic = Bitmap.createScaledBitmap(bmpPic, 400, 600, true);
+                bmpPic = Bitmap.createScaledBitmap(bmpPic, 400, 400, true);
                 img = (ImageView) findViewById(R.id.update_profile_elder_display);
                 img.setImageBitmap(bmpPic);
             }catch  (Exception e) {

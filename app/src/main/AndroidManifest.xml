@@ -7,9 +7,12 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission
         android:name="android.permission.CAMERA"
         android:required="true" />
+    <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -38,7 +41,17 @@
         <activity android:name=".Register_Caregiver" />
         <activity android:name=".Update_Profile_Caregiver" />
         <activity android:name=".Listview_Show" />
-        <activity android:name=".CareGiver_in_box"></activity>
+        <activity android:name=".CareGiver_in_box" />
+        <activity android:name=".Caregiver_Detail" />
+        <activity android:name=".Elderly_Detail" />
+        <activity android:name=".Create_Care_Activity" />
+        <activity android:name=".Booking_List_Caregiver" />
+        <activity android:name=".Booking_List_Elderly" />
+        <activity
+            android:name=".Booking_Elderly_Detail"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".QRCodeScaner" />
+        <activity android:name=".Rating"></activity>
     </application>
 
 </manifest>

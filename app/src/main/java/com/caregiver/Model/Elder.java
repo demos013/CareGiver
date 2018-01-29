@@ -26,6 +26,7 @@ public class Elder implements Serializable{
     private String relation_elder;
     private String relative_mobile_number;
     private Location location ;
+    private String sex;
 
 
 
@@ -47,6 +48,7 @@ public class Elder implements Serializable{
         this.relation_elder = relation_elder;
         this.relative_mobile_number = relative_mobile_number;
         this.location = new Location();
+
     }
 
 
@@ -69,6 +71,7 @@ public class Elder implements Serializable{
         this.photo_path = "null";
         this.relation_elder = "null";
         this.location = new Location();
+        this.sex = "null";
     }
 
     public String getMobile_number() {
@@ -205,5 +208,14 @@ public class Elder implements Serializable{
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public Elder setSex(String sex) {
+        this.sex = sex;
+        return this;
     }
 }
