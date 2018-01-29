@@ -31,7 +31,7 @@ public class elderly_adapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        
+
         return null;
     }
 
