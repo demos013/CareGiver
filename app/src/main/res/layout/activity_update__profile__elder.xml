@@ -15,16 +15,25 @@
         android:layout_marginTop="30dp"
         app:srcCompat="@drawable/man" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:onClick="onClickRotateDisplay"
+        app:srcCompat="@drawable/rotating" />
+
     <Button
         android:id="@+id/update_profile_elder_button_take_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/take_photo_by_camera"
-        android:textColor="@color/White"
-        android:textSize="@dimen/font_medium"
         android:layout_marginTop="20dp"
         android:background="@color/colorMain"
-        android:onClick="selectDisplayBySelfie"/>
+        android:onClick="selectDisplayBySelfie"
+        android:text="@string/take_photo_by_camera"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium" />
 
     <Button
         android:id="@+id/update_profile_elder_button_choose_photo"

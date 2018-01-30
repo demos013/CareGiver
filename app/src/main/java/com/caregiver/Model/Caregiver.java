@@ -13,12 +13,20 @@ public class Caregiver  implements Serializable {
     private String name;
     private String lastname;
     private String citizen_id;
+    private String sex;
     private String date_of_birth;
     private String address;
     private String telephone;
     private String specialization;
     private String carecenter_id;
     private Location location;
+    private String experience;
+    private String job;
+    private String cost;
+    private String city;
+    private String district;
+    private String state;
+
 
 
     public Caregiver() {
@@ -27,6 +35,7 @@ public class Caregiver  implements Serializable {
         this.photo_path = "null";
         this.name = "null";
         this.lastname = "null";
+        this.sex = "null";
         this.citizen_id = "null";
         this.date_of_birth = "null";
         this.address = "null";
@@ -34,21 +43,14 @@ public class Caregiver  implements Serializable {
         this.specialization = "null";
         this.carecenter_id = "null";
         this.location = new Location();
+        this.experience = "null";
+        this.job = "null";
+        this.cost = "null";
+        this.city = "null";
+        this.district = "null";
+        this.state = "null";
     }
 
-    public Caregiver(String mobile_number, String uid, String photo_path, String name, String lastname, String citizen_id, String date_of_birth, String address, String telephone, String specialization, String carecenter_id) {
-        this.mobile_number = mobile_number;
-        this.uid = uid;
-        this.photo_path = photo_path;
-        this.name = name;
-        this.lastname = lastname;
-        this.citizen_id = citizen_id;
-        this.date_of_birth = date_of_birth;
-        this.address = address;
-        this.telephone = telephone;
-        this.specialization = specialization;
-        this.carecenter_id = carecenter_id;
-    }
 
     public String getMobile_number() {
         return mobile_number;
@@ -144,5 +146,62 @@ public class Caregiver  implements Serializable {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public String getCost() {
+        return cost;
+    }
+
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

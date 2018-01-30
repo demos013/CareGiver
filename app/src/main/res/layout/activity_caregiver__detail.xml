@@ -37,19 +37,19 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="caregiver_detail_name"
-                    android:textSize="@dimen/font_small"/>
+                    android:textSize="@dimen/font_small" />
 
                 <RatingBar
                     android:id="@+id/ratingBar"
                     style="?android:attr/ratingBarStyle"
-                    android:scaleX="0.7"
-                    android:scaleY="0.7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:isIndicator="true"
                     android:numStars="5"
                     android:rating="5"
+                    android:scaleX="0.7"
+                    android:scaleY="0.7"
                     android:stepSize="0.1" />
 
                 <LinearLayout
@@ -65,7 +65,7 @@
                         android:gravity="center"
                         android:onClick="onClickInfo"
                         android:text="Info"
-                        android:textSize="@dimen/font_small"/>
+                        android:textSize="@dimen/font_small" />
 
                     <TextView
                         android:id="@+id/textView5"
@@ -75,7 +75,7 @@
                         android:gravity="center"
                         android:onClick="onClickReview"
                         android:text="Reviews"
-                        android:textSize="@dimen/font_small"/>
+                        android:textSize="@dimen/font_small" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -98,18 +98,87 @@
                         android:layout_height="wrap_content"
                         android:background="@color/colorMain"
                         android:paddingLeft="10dp"
-                        android:text="About"
+                        android:text="ข้อมูลทั่วไป"
+                        android:textColor="@color/White"
                         android:textSize="@dimen/font_small" />
 
-                    <TextView
-                        android:id="@+id/textView4"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginTop="10dp"
-                        android:text="dddddddddddddddddddsdsdsfdghhgdsfghjgfdsdfghjkjgfdsfgjkjhgfdsdfghjgfdsdfgjkjgfdsadfghjkjhgfdsdfghjkjgfds " />
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/caregiver_detail_sex"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="เพศ "
+                            android:textSize="@dimen/font_small" />
+
+                        <TextView
+                            android:id="@+id/caregiver_detail_age"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="อายุ "
+                            android:textSize="@dimen/font_small" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/caregiver_detail_job"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="อาชีพ"
+                            android:textSize="@dimen/font_small" />
+
+                        <TextView
+                            android:id="@+id/caregiver_detail_experience"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="ประสบการณ์ทำงาน"
+                            android:textSize="@dimen/font_small" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/caregiver_detail_cost"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="ราคาค่าบริการ"
+                            android:textSize="@dimen/font_small" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -123,18 +192,20 @@
                         android:layout_height="wrap_content"
                         android:background="@color/colorMain"
                         android:paddingLeft="10dp"
-                        android:text="Skill"
+                        android:text="ทักษะ"
+                        android:textColor="@color/White"
                         android:textSize="@dimen/font_small" />
 
                     <TextView
-                        android:id="@+id/textView8"
+                        android:id="@+id/caregiver_detail_skill"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginTop="10dp"
-                        android:text="TextView" />
+                        android:text="TextView"
+                        android:textSize="@dimen/font_small" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -146,11 +217,14 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="10dp"
+                    android:layout_height="wrap_content"
                     android:background="@color/colorMain"
-                    android:orientation="vertical"></LinearLayout>
+                    android:paddingLeft="10dp"
+                    android:text="คำวิจารณ์"
+                    android:textColor="@color/White"
+                    android:textSize="@dimen/font_small" />
 
                 <ListView
                     android:id="@+id/Caregiver_detail_listview_review"

@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -22,6 +23,8 @@ import android.widget.ImageView;
 import com.caregiver.Model.Caregiver;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -35,37 +38,52 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Update_Profile_Caregiver extends AppCompatActivity {
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    FirebaseUser user;
 
     private String filePath;
     private int MY_CAMERA_REQUEST_CODE =100;
     private ImageView img;
     private Caregiver caregiverDB;
+    private int angle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update__profile__caregiver);
         caregiverDB = (Caregiver) getIntent().getSerializableExtra("caregiverDB");
+        angle = 90;
 
-        // Permission StrictMode
-        if (Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        MY_CAMERA_REQUEST_CODE);
+    }
+    public void onStart() {
+        super.onStart();
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
+                user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+
+
+
+                } else {
+                    startActivity(new Intent(Update_Profile_Caregiver.this,Authentication.class));
+                }
+                // ...
             }
+        };
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{android.Manifest.permission.CAMERA},
-                        MY_CAMERA_REQUEST_CODE);
-            }
-        }
     }
 
     public void selectDisplayBySelfie(View view){
@@ -126,7 +144,7 @@ public class Update_Profile_Caregiver extends AppCompatActivity {
                 Log.d("imgDecodableString",imgDecodableString);
                 filePath ="file://"+imgDecodableString;
                 Bitmap bmpPic = BitmapFactory.decodeFile(imgDecodableString);
-                bmpPic = Bitmap.createScaledBitmap(bmpPic, 400, 600, true);
+                bmpPic = Bitmap.createScaledBitmap(bmpPic, 400, 400, true);
                 img = (ImageView) findViewById(R.id.update_profile_caregiver_display);
                 img.setImageBitmap(bmpPic);
             }catch  (Exception e) {
@@ -167,5 +185,19 @@ public class Update_Profile_Caregiver extends AppCompatActivity {
                 Log.d("success", "onSuccess: ");
             }
         });
+    }
+
+    public void onClickRotateDisplay(View view){
+        try {
+            Matrix mat = new Matrix();
+            mat.postRotate(angle);
+            Bitmap bitmap = ((BitmapDrawable) img.getDrawable()).getBitmap();
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), mat, true);
+            img.setImageBitmap(bitmap);
+        }catch (Exception exception){
+
+        }
+
+
     }
 }

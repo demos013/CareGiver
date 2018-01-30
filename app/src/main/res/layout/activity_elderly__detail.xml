@@ -176,23 +176,41 @@
         android:gravity="bottom|end"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/elderly_detail_confirm_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorMain"
+                android:onClick="onConfirmActivity"
+                android:text="ยืนยันการจอง"
+                android:textColor="@color/White"
+                android:textSize="@dimen/font_medium" />
+
+            <Button
+                android:id="@+id/elderly_detail_delete_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorMain"
+                android:onClick="onClickDeleteActivity"
+                android:text="ยกเลิกการจอง"
+                android:textColor="@color/White"
+                android:textSize="@dimen/font_medium" />
+        </LinearLayout>
+
         <Button
             android:id="@+id/elderly_detail_call_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="โทรหาผู้สูงอายุ"
-            android:onClick="onCallElder"
             android:background="@color/colorAccent"
-            android:textColor="@color/White"
-            android:textSize="@dimen/font_medium" />
-
-        <Button
-            android:id="@+id/elderly_detail_confirm_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ยืนยันการจอง"
-            android:background="@color/colorMain"
-            android:onClick="onConfirmActivity"
+            android:onClick="onCallElder"
+            android:text="โทรหาผู้สูงอายุ"
             android:textColor="@color/White"
             android:textSize="@dimen/font_medium" />
     </LinearLayout>

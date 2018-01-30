@@ -71,11 +71,32 @@ public class Caregiver_Detail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caregiver__detail);
         caregiverDB = (Caregiver) getIntent().getSerializableExtra("caregiverDB");
-        TextView tmp = findViewById(R.id.caregiver_detail_name);
-        tmp.setText(caregiverDB.getName()+" "+caregiverDB.getLastname());
+        TextView nametxt = findViewById(R.id.caregiver_detail_name);
+        nametxt.setText("คุณ "+caregiverDB.getName()+" "+caregiverDB.getLastname());
         ImageView img = findViewById(R.id.caregiver_detail_display);
-        downloadInLocalFile(img,caregiverDB);
 
+        TextView sextxt = findViewById(R.id.caregiver_detail_sex);
+        sextxt.setText("เพศ "+caregiverDB.getSex());
+
+        TextView agetxt = findViewById(R.id.caregiver_detail_age);
+        String tmp = caregiverDB.getDate_of_birth();
+        String[] split = tmp.split("/");
+        int age = Calendar.getInstance().get(Calendar.YEAR)-Integer.valueOf(split[2]);
+        agetxt.setText("อายุ "+age+" ปี");
+
+        TextView jobtxt = findViewById(R.id.caregiver_detail_job);
+        jobtxt.setText(caregiverDB.getJob());
+
+        TextView exptxt = findViewById(R.id.caregiver_detail_experience);
+        exptxt.setText("ประสบการณ์ "+caregiverDB.getExperience()+" ปี");
+
+        TextView costtxt = findViewById(R.id.caregiver_detail_cost);
+        costtxt.setText("ราคาบริการ "+caregiverDB.getCost()+" บาท");
+
+        TextView skilltxt = findViewById(R.id.caregiver_detail_skill);
+        skilltxt.setText(caregiverDB.getSpecialization());
+
+        downloadInLocalFile(img,caregiverDB);
 
     }
 

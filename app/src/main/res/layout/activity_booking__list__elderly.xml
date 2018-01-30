@@ -35,10 +35,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:elevation="0dp"
             android:text="@string/under"
-            android:background="@color/colorMain"
             android:textColor="@color/White"
-            android:textSize="@dimen/font_medium"/>
+            android:textSize="@dimen/font_medium" />
 
         <Button
             android:id="@+id/caregiver_more"

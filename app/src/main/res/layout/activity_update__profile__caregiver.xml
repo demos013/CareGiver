@@ -9,10 +9,20 @@
 
     <ImageView
         android:id="@+id/update_profile_caregiver_display"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         app:srcCompat="@drawable/man" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:srcCompat="@drawable/rotating"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:onClick="onClickRotateDisplay"/>
 
     <Button
         android:id="@+id/button11"
@@ -45,6 +55,8 @@
         android:onClick="updateDisplay"
         android:text="ต่อไป"
         android:textColor="@color/White"
-        android:textSize="@dimen/font_medium" />
->>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
+        android:textSize="@dimen/font_medium" /><![CDATA[
+
+    >>>>>>> be8d61273f81a53e66e03e61ffc2190d81067a97
+]]>
 </LinearLayout>

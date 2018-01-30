@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CareGiver</string>
+    <string name="app_name">TU Care Giver</string>
     <string name="title_activity_map">Map</string>
     <string name="drawer_open">Open Navigation drawer</string>
     <string name="drawer_close">Close Navigation drawer</string>
@@ -32,15 +32,23 @@
     <string name="more">เพิ่มเติม</string>
 
     <string-array name="sex">
+        <item>เพศ</item>
         <item>ชาย</item>
         <item>หญิง</item>
     </string-array>
 
     <string-array name="blood_group">
+        <item>หมู่เลือด</item>
         <item>เอ</item>
         <item>บี</item>
         <item>เอบี</item>
         <item>โอ</item>
+    </string-array>
+
+    <string-array name="caregiver_type">
+        <item>อาชีพ</item>
+        <item>พยาบาลวิชาชีพ</item>
+        <item>ผู้ช่วยพยาบาล</item>
     </string-array>
 
 </resources>

@@ -114,7 +114,7 @@ public class elderly_booking_adapter extends BaseAdapter {
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                 Bitmap bmpPic = BitmapFactory.decodeFile(file.getPath());
-                bmpPic = Bitmap.createScaledBitmap(bmpPic, 200, 150, true);
+                bmpPic = Bitmap.createScaledBitmap(bmpPic, 150, 200, true);
                 img.setImageBitmap(bmpPic);
                 file.delete();
 

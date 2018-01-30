@@ -154,7 +154,6 @@ public class Booking_Elderly_Detail extends AppCompatActivity  {
 
         final FileDownloadTask fileDownloadTask = imageRef.getFile(file);
 
-
         fileDownloadTask.addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
@@ -199,10 +198,10 @@ public class Booking_Elderly_Detail extends AppCompatActivity  {
                 String[] split = tmp.split("/");
                 int age = Calendar.getInstance().get(Calendar.YEAR)-Integer.valueOf(split[2]);
                 agetxt.setText("อายุ "+String.valueOf(age)+" ปี");
-                sextxt.setText(elderDB.getSex());
-                bloodtxt.setText(elderDB.getBlood_group());
-                jobtxt.setText(elderDB.getJob());
-                drugtxt.setText(elderDB.getDrug_allergy());
+                sextxt.setText("เพศ "+elderDB.getSex());
+                bloodtxt.setText("หมู่เลือด "+elderDB.getBlood_group());
+                jobtxt.setText("อาชีพ "+elderDB.getJob());
+                drugtxt.setText("ยาที่แพ้ "+elderDB.getDrug_allergy());
                 dailyedt.setText(activity.getActivity_detail());
                 /*datetxt.append(request.getStart_date());
                 timetxt.append(request.getStart_time()+" นาฬิกา");*/

@@ -17,6 +17,8 @@ import android.widget.Spinner;
 
 import com.caregiver.Model.Elder;
 import com.caregiver.Model.Location;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -27,12 +29,45 @@ import java.util.Locale;
 
 public class Register_Elder extends AppCompatActivity {
 
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register__elder);
 
         setOnClickAllEditText();
+
+
+    }
+
+    public void onStart() {
+        super.onStart();
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
+                user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+
+
+                } else {
+                    startActivity(new Intent(Register_Elder.this,Authentication.class));
+                }
+                // ...
+            }
+        };
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
 
 
     }
@@ -61,7 +96,7 @@ public class Register_Elder extends AppCompatActivity {
         Spinner mBloodSpiner = (Spinner) findViewById(R.id.register_elder_blood_group);
         elderDB.setBlood_group(mBloodSpiner.getSelectedItem().toString());
         Spinner mSexSpiner = (Spinner) findViewById(R.id.register_elder_sex);
-        elderDB.setBlood_group(mSexSpiner.getSelectedItem().toString());
+        elderDB.setSex(mSexSpiner.getSelectedItem().toString());
         edttemp = findViewById(R.id.register_elder_relative_name);
         elderDB.setRelative_name(edttemp.getText().toString());
         edttemp = findViewById(R.id.register_elder_relative_lastname);
@@ -127,7 +162,7 @@ public class Register_Elder extends AppCompatActivity {
         String[] blood = getResources().getStringArray(R.array.blood_group);
         ArrayAdapter<String> adapterBlood = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, blood);
-        mBloodSpiner.setAdapter(adapterSex);
+        mBloodSpiner.setAdapter(adapterBlood);
 
     }
 

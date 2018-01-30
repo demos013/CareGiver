@@ -7,17 +7,26 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.caregiver.Model.Caregiver;
+import com.caregiver.Model.Review;
 import com.caregiver.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -66,7 +75,39 @@ public class showcaregiverlistview extends BaseAdapter {
         ImageView img = view.findViewById(R.id.row_image_caregiver);
         downloadInLocalFile(img, AllCaregiverDB.get(i));
         TextView caregiver_name = view.findViewById(R.id.row_name_caregiver);
-        caregiver_name.setText(AllCaregiverDB.get(i).getName()+" "+AllCaregiverDB.get(i).getLastname());
+        caregiver_name.setText("คุณ "+AllCaregiverDB.get(i).getName()+" "+AllCaregiverDB.get(i).getLastname());
+        TextView caregiver_job = view.findViewById(R.id.row_caregiver_job);
+        caregiver_job.setText(AllCaregiverDB.get(i).getJob());
+        TextView caregiver_cost = view.findViewById(R.id.row_caregiver_cost);
+        caregiver_cost.setText("ค่าบริการ "+AllCaregiverDB.get(i).getCost()+" บาท");
+        final TextView score = view.findViewById(R.id.row_caregiver_score);
+
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mReviewRef= mRootRef.child("Review");
+        Query query = mReviewRef.orderByChild("caregiver_uid").equalTo(AllCaregiverDB.get(i).getUid());
+        final View finalView = view;
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                float rating = 0;
+                int size = 0;
+                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    rating = rating+postSnapshot.getValue(Review.class).getScore();
+                    size +=1;
+                }
+
+                rating/=size;
+                RatingBar ratingBar = finalView.findViewById(R.id.row_caregiver_rating_bar);
+                ratingBar.setRating(rating);
+                score.setText(String.valueOf(size)+" คำวิจารณ์");
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
 

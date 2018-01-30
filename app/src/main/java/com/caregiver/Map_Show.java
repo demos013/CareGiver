@@ -1,7 +1,12 @@
 package com.caregiver;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.support.annotation.DrawableRes;
 import android.support.v4.widget.DrawerLayout;
@@ -9,18 +14,32 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.caregiver.CustomListview.navigationlistview;
+import com.caregiver.CustomWindowAdapter.CustomWindowAdapter;
 import com.caregiver.Model.Care_Activity;
+import com.caregiver.Model.Caregiver;
 import com.caregiver.Model.Elder;
+import com.caregiver.Model.Review;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,8 +49,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
@@ -44,6 +66,16 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
     private FirebaseAuth.AuthStateListener mAuthListener;
     FirebaseUser user;
     private Elder elderDB;
+    private ArrayList<Caregiver> caregiverDB;
+    private ArrayList<Float> sumScore;
+    private ArrayList<Integer> sumReview;
+
+    private HashMap<Marker,Caregiver> hashCaregiver;
+    private HashMap<Marker,Float> hashScore;
+    private HashMap<Marker,Integer> hashReview_num;
+
+
+    private GoogleMap mMap;
 
     private String[] mDrawerTitle = {"รายการจอง", "Sign out"};
     private ActionBarDrawerToggle mDrawerToggle;
@@ -59,6 +91,9 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onStart() {
         super.onStart();
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map_map);
+        mapFragment.getMapAsync(this);
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -69,6 +104,8 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
                     setupNavigationBar();
                     updateLocation();
                     getActivityReview();
+                    getCaregiverDB();
+
 
                 } else {
                     startActivity(new Intent(Map_Show.this,Authentication.class));
@@ -77,6 +114,7 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
             }
         };
         mAuth.addAuthStateListener(mAuthListener);
+
     }
 
     @Override
@@ -85,7 +123,7 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
-
+        mMap.clear();
         SmartLocation.with(this)
                 .location()
                 .stop();
@@ -97,6 +135,50 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+
+            @Override
+            public void onInfoWindowClick(Marker arg0) {
+                if(!arg0.getTitle().equalsIgnoreCase("คุณอยู่นี่")){
+                    Log.d(arg0.getId(), "onStart: ");
+                    Intent intent = new Intent(Map_Show.this,Caregiver_Detail.class);
+                    intent.putExtra("caregiverDB",hashCaregiver.get(arg0));
+                    startActivity(intent);
+                }
+
+            }
+        });
+
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+            @Override
+            public View getInfoWindow(Marker arg0) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+
+                LinearLayout info = new LinearLayout(getApplicationContext());
+                info.setOrientation(LinearLayout.VERTICAL);
+
+                TextView title = new TextView(getApplicationContext());
+                title.setTextColor(Color.BLACK);
+                title.setGravity(Gravity.CENTER);
+                title.setTypeface(null, Typeface.BOLD);
+                title.setText(marker.getTitle());
+
+                TextView snippet = new TextView(getApplicationContext());
+                snippet.setTextColor(Color.GRAY);
+                snippet.setText(marker.getSnippet());
+
+                info.addView(title);
+                info.addView(snippet);
+
+                return info;
+            }
+        });
 
     }
 
@@ -200,6 +282,18 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
                             Map<String,Object> newLocation = new HashMap<>();
                             newLocation.put("location",new com.caregiver.Model.Location(location.getLatitude(),location.getLongitude()));
                             mUsersRef.updateChildren(newLocation);
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()), 13.0f));
+                            Marker now;
+
+                            LatLng IAmHere = new LatLng(location.getLatitude(), location.getLongitude());
+                            now = mMap.addMarker(new MarkerOptions().position(IAmHere)
+                                    .title("คุณอยู่นี่")
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.circle_elder)));
+
+
+
+
+
                         }
                     });
         } else {
@@ -222,6 +316,31 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
             }
         });
 
+    }
+
+    public void getCaregiverDB(){
+        caregiverDB = new ArrayList<>();
+        hashCaregiver = new HashMap<>();
+        final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mCaregiverRef = mRootRef.child("Caregiver");
+        Query query = mCaregiverRef.orderByKey();
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    caregiverDB.add(postSnapshot.getValue(Caregiver.class));
+
+
+                }
+                updateCaregiverLocation();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void getActivityReview(){
@@ -247,6 +366,27 @@ public class Map_Show extends AppCompatActivity implements OnMapReadyCallback {
         });
 
     }
+
+    public void updateCaregiverLocation(){
+
+
+        for(Caregiver caregiver : caregiverDB){
+            LatLng caregiverLocation = new LatLng(caregiver.getLocation().getLatitude(), caregiver.getLocation().getLongitude());
+            Marker marker= mMap.addMarker(new MarkerOptions().position(caregiverLocation).title(caregiver.getName()+" "+caregiver.getLastname())
+                    .snippet(caregiver.getJob()+"\nค่าบริการ "+caregiver.getCost()+" บาท")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.circle_caregiver)));
+/*          Log.d(String.valueOf(sumReview.size()), "updateCaregiverLocation: ");
+            Log.d(String.valueOf(sumScore.size()), "updateCaregiverLocation: ");*/
+
+            hashCaregiver.put(marker,caregiver);
+
+        }
+        //mMap.setInfoWindowAdapter(new CustomWindowAdapter((LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE),hashCaregiver));
+
+
+    }
+
+
 
 
 }

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.caregiver"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -37,6 +37,7 @@ dependencies {
     compile 'androidmads.library.qrgenearator:QRGenearator:1.0.3'
     compile 'me.dm7.barcodescanner:zxing:1.9.8'
     compile 'com.github.nisrulz:qreader:2.1.2'
+    compile 'net.sharewire:google-maps-clustering:0.1.2-beta'
 
 
     compile('io.nlopez.smartlocation:library:3.3.3') {

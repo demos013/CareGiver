@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.caregiver.Register_Elder"
-    android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:layout_marginTop="20dp">
+    android:orientation="vertical"
+    tools:context="com.caregiver.Register_Elder">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,13 +18,15 @@
             android:id="@+id/register_elder_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="@string/be_an_elder"
             android:textSize="@dimen/font_medium" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="15dp"
             android:background="@color/colorMain"
             android:orientation="vertical"></LinearLayout>
     </LinearLayout>
@@ -39,148 +40,149 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <EditText
                 android:id="@+id/register_elder_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:ems="10"
                 android:hint="@string/name"
                 android:inputType="textPersonName"
-                android:textSize="@dimen/font_small"
-                android:background="@drawable/border"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/border"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"/>
+                android:paddingRight="5dp"
+                android:textSize="@dimen/font_small" />
 
             <EditText
                 android:id="@+id/register_elder_lastname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/last_name"
-                android:inputType="textPersonName"
-                android:textSize="@dimen/font_small"
-                android:background="@drawable/border"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="@string/last_name"
+                android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"/>
+                android:paddingRight="5dp"
+                android:textSize="@dimen/font_small" />
 
             <EditText
                 android:id="@+id/register_elder_citizen_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/citizen_id"
-                android:inputType="number"
-                android:textSize="@dimen/font_small"
-                android:background="@drawable/border"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="@string/citizen_id"
+                android:inputType="number"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp" />
+                android:paddingRight="5dp"
+                android:textSize="@dimen/font_small" />
 
             <Spinner
                 android:id="@+id/register_elder_sex"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="24dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/border"
-                />
+                android:background="@drawable/border" />
 
 
             <EditText
                 android:id="@+id/register_elder_date_of_birth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/date_of_birth"
-                android:inputType="number"
-                android:focusable="false"
-                android:background="@drawable/border"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="@string/date_of_birth"
+                android:inputType="number"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"/>
+                android:paddingRight="5dp" />
 
             <EditText
                 android:id="@+id/register_elder_job"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/job"
-                android:inputType="textPersonName"
-                android:background="@drawable/border"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="@string/job"
+                android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"/>
+                android:paddingRight="5dp" />
 
             <EditText
                 android:id="@+id/register_elder_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/address"
-                android:inputType="textPersonName"
-                android:background="@drawable/border"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="@string/address"
+                android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"/>
+                android:paddingRight="5dp" />
 
             <EditText
                 android:id="@+id/register_elder_telephone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/telephone"
-                android:inputType="number"
-                android:background="@drawable/border"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="@string/telephone"
+                android:inputType="number"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"/>
+                android:paddingRight="5dp" />
 
             <EditText
                 android:id="@+id/register_elder_drug_allergy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/drug_allergy"
-                android:inputType="textPersonName"
-                android:background="@drawable/border"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="@string/drug_allergy"
+                android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"/>
+                android:paddingRight="5dp" />
 
             <Spinner
                 android:id="@+id/register_elder_blood_group"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="24dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
@@ -191,46 +193,46 @@
                 android:id="@+id/register_elder_relative_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/relative_name"
-                android:inputType="textPersonName"
-                android:background="@drawable/border"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="@string/relative_name"
+                android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"/>
+                android:paddingRight="5dp" />
 
             <EditText
                 android:id="@+id/register_elder_relative_lastname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/relative_last_name"
-                android:inputType="textPersonName"
-                android:background="@drawable/border"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="@string/relative_last_name"
+                android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"/>
+                android:paddingRight="5dp" />
 
             <EditText
                 android:id="@+id/register_elder_relative_telephone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/relative_telephone"
-                android:inputType="number"
-                android:background="@drawable/border"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="@string/relative_telephone"
+                android:inputType="number"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"/>
+                android:paddingRight="5dp" />
         </LinearLayout>
     </ScrollView>
 

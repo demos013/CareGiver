@@ -216,6 +216,39 @@ public class Elderly_Detail extends AppCompatActivity {
 
     }
 
+    public void onClickDeleteActivity(final View view){
+
+        final Dialog dialog = new Dialog(Elderly_Detail.this);
+        dialog.setContentView(R.layout.dialog_finish_activity);
+
+        TextView txt = dialog.findViewById(R.id.dialog_finish_txt);
+        txt.setText("ยกเลิกคำร้องกิจกรรม");
+
+        Button buttonCancel = (Button) dialog.findViewById(R.id.dialog_finish_activity_cancel);
+        Button buttonOK = (Button) dialog.findViewById(R.id.dialog_finish_activity_ok);
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        buttonOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference mRequestRef = mRootRef.child("Request_Care_Activity").child(elderDB.getUid()+user.getUid());
+                mRequestRef.removeValue();
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
+
+    }
+
     public void getElderDB(){
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mUsersRef = mRootRef.child("Elder");
@@ -235,15 +268,16 @@ public class Elderly_Detail extends AppCompatActivity {
                 TextView timetxt = findViewById(R.id.elderly_detail_time);
                 nametxt.setText("คุณ "+elderDB.getName()+" "+elderDB.getLastname());
                 String tmp = elderDB.getDate_of_birth();
+                Log.d(elderDB.getDate_of_birth(), "onDataChange: ");
                 String[] split = tmp.split("/");
                 int age = Calendar.getInstance().get(Calendar.YEAR)-Integer.valueOf(split[2]);
-                agetxt.append(String.valueOf(age)+" ปี");
-                sextxt.append(elderDB.getSex());
-                bloodtxt.append(elderDB.getBlood_group());
-                jobtxt.append(elderDB.getJob());
-                drugtxt.append(elderDB.getDrug_allergy());
-                datetxt.append(request.getStart_date());
-                timetxt.append(request.getStart_time()+" นาฬิกา");
+                agetxt.setText("อายุ "+String.valueOf(age)+" ปี");
+                sextxt.setText("เพศ "+elderDB.getSex());
+                bloodtxt.setText("หมู่เลือด "+elderDB.getBlood_group());
+                jobtxt.setText("อาชีพ "+elderDB.getJob());
+                drugtxt.setText("ยาที่แพ้ "+elderDB.getDrug_allergy());
+                datetxt.setText("วันที่จอง "+request.getStart_date());
+                timetxt.setText("เวลา "+request.getStart_time()+" นาฬิกา");
 
             }
 

@@ -7,6 +7,8 @@
     <color name="White">#ffffff</color>
     <color name="colorpress">#0e544e</color>
     <color name="Grey">#dadada</color>
+    <color name="lightGrey">#b7b6b6</color>
     <color name="Black">#1a1919</color>
+    <color name="duskYellow">#f9e10b</color>
 
 </resources>

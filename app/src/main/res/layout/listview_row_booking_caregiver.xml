@@ -19,18 +19,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/row_booking_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Full Name" />
+                android:layout_weight="1"
+                android:text="Full Name"
+                android:gravity="center_vertical"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
@@ -38,19 +40,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="วันที่" />
+                    android:text="วันที่"
+                    android:gravity="center_vertical"/>
 
                 <TextView
                     android:id="@+id/row_booking_start_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="วันที่" />
+                    android:text="วันที่"
+                    android:gravity="center_vertical"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
@@ -58,14 +63,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="เวลา" />
+                    android:text="เวลา"
+                    android:gravity="center_vertical"/>
 
                 <TextView
                     android:id="@+id/row_booking_start_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="เวลา" />
+                    android:text="เวลา"
+                    android:gravity="center_vertical"/>
             </LinearLayout>
 
         </LinearLayout>

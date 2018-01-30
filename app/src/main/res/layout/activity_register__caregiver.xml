@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.caregiver.Register_Caregiver"
-    android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:layout_marginTop="20dp">
+    android:orientation="vertical"
+    tools:context="com.caregiver.Register_Caregiver">
 
 
     <LinearLayout
@@ -20,20 +19,30 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="สมัครสมาชิกเป็นผู้ดูแล"
             android:textSize="@dimen/font_medium" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="@color/colorMain"
+            android:orientation="vertical"></LinearLayout>
+
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <EditText
@@ -43,6 +52,13 @@
                 android:ems="10"
                 android:hint="ชื่อ"
                 android:inputType="textPersonName"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:textSize="@dimen/font_small" />
 
             <EditText
@@ -51,6 +67,13 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="นามสกุล"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:inputType="textPersonName"
                 android:textSize="@dimen/font_small" />
 
@@ -60,8 +83,25 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="เลขบัตรประจำตัวประชาชน"
-                android:inputType="textPersonName"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:inputType="number"
                 android:textSize="@dimen/font_small" />
+
+            <Spinner
+                android:id="@+id/register_caregiver_sex"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border" />
 
             <EditText
                 android:id="@+id/register_caregiver_date_of_birth"
@@ -69,56 +109,131 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/date_of_birth"
-                android:inputType="textPersonName" />
+                android:focusable="false"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:inputType="none"
+                android:textIsSelectable="true"/>
+
+            <Spinner
+                android:id="@+id/register_caregiver_job"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border" />
 
             <EditText
-                android:id="@+id/register_caregiver_address"
+                android:id="@+id/register_caregiver_experience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
                 android:ems="10"
-                android:hint="ที่อยู่"
-                android:inputType="textPersonName" />
+                android:hint="ประสบการณ์การทำงาน (ปี)"
+                android:inputType="number"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+               />
 
             <EditText
-                android:id="@+id/register_caregiver_telephone"
+                android:id="@+id/register_caregiver_cost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
                 android:ems="10"
-                android:hint="@string/telephone"
-                android:inputType="textPersonName" />
+                android:hint="ค่าบริการ (บาท)"
+                android:inputType="number"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
 
             <EditText
                 android:id="@+id/register_caregiver_specialization"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
                 android:ems="10"
                 android:hint="ความถนัดเฉพาะ"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
 
             <EditText
-                        android:id="@+id/register_caregiver_carecenter_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="สังกัด"
-                        android:inputType="textPersonName" />
+                android:id="@+id/register_caregiver_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="ตำบล"
+                android:inputType="textPersonName"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
+
+            <EditText
+                android:id="@+id/register_caregiver_district"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="อำเภอ"
+                android:inputType="textPersonName"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
+
+            <EditText
+                android:id="@+id/register_caregiver_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:hint="จังหวัด"
+                android:inputType="textPersonName"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
 
         </LinearLayout>
     </ScrollView>
 
     <Button
         android:id="@+id/register_caregiver_button_sign_up"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up"
-        android:gravity="center"
-        android:textColor="@color/White"
-        android:textSize="@dimen/font_medium"
-        android:layout_marginTop="20dp"
         android:background="@color/colorMain"
-        android:onClick="onClickRegisterCaregiver" />
-
-
+        android:gravity="center"
+        android:onClick="onClickRegisterCaregiver"
+        android:text="@string/sign_up"
+        android:textColor="@color/White"
+        android:textSize="@dimen/font_medium" />
 
 
 </LinearLayout>

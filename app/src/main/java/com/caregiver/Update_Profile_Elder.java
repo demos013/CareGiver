@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -23,6 +24,8 @@ import android.widget.ImageView;
 import com.caregiver.Model.Elder;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -37,10 +40,16 @@ import java.util.Date;
 
 public class Update_Profile_Elder extends AppCompatActivity {
 
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    FirebaseUser user;
+
     private String filePath;
     private int MY_CAMERA_REQUEST_CODE =100;
     private ImageView img;
     private Elder elderDB;
+
+    private int angle;
 
 
     @Override
@@ -48,33 +57,46 @@ public class Update_Profile_Elder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update__profile__elder);
         elderDB = (Elder) getIntent().getSerializableExtra("elderDB");
+        angle = 90;
 
-        // Permission StrictMode
-        if (Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        MY_CAMERA_REQUEST_CODE);
+    }
+
+    public void onStart() {
+        super.onStart();
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
+                user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+
+
+                } else {
+                    startActivity(new Intent(Update_Profile_Elder.this,Authentication.class));
+                }
+                // ...
             }
+        };
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.CAMERA},
-                        MY_CAMERA_REQUEST_CODE);
-            }
-        }
+
     }
 
 
     public void selectDisplayBySelfie(View view){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "pkl_" + timeStamp + ".jpg";
+        String imageFileName = "caregiver_" + timeStamp + ".jpg";
         File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), imageFileName);
         Uri fileUri = Uri.fromFile(f);
         filePath = fileUri.toString();
@@ -87,7 +109,7 @@ public class Update_Profile_Elder extends AppCompatActivity {
     public void selectDisplayByGallery(View view){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "pkl_" + timeStamp + ".jpg";
+        String imageFileName = "care_giver_" + timeStamp + ".jpg";
         File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), imageFileName);
         Uri fileUri = Uri.fromFile(f);
         filePath = fileUri.toString();
@@ -106,7 +128,6 @@ public class Update_Profile_Elder extends AppCompatActivity {
                 Matrix mat = new Matrix();
                 mat.postRotate(270);
                 bmpPic = Bitmap.createBitmap(bmpPic, 0, 0, bmpPic.getWidth(), bmpPic.getHeight(), mat, true);
-                bmpPic.compress(Bitmap.CompressFormat.JPEG, 10, bmpFile);
                 bmpFile.flush();
                 bmpFile.close();
                 img = (ImageView) findViewById(R.id.update_profile_elder_display);
@@ -171,6 +192,20 @@ public class Update_Profile_Elder extends AppCompatActivity {
                 Log.d("success", "onSuccess: ");
             }
         });
+    }
+
+    public void onClickRotateDisplay(View view){
+        try {
+            Matrix mat = new Matrix();
+            mat.postRotate(angle);
+
+            Bitmap bitmap = ((BitmapDrawable) img.getDrawable()).getBitmap();
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), mat, true);
+            img.setImageBitmap(bitmap);
+        }catch (Exception e){
+
+        }
+
     }
 
 }
