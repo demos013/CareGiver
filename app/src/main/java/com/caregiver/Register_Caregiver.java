@@ -176,7 +176,8 @@ public class Register_Caregiver extends AppCompatActivity {
                         public void onLocationUpdated(Location location) {
                             Geocoder geocoder;
                             List<Address> addresses;
-                            geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+                            Locale lc = new Locale("th","TH");
+                            geocoder = new Geocoder(getApplicationContext(), lc);
 
                             try {
                                 //Log.d("fuck", "onLocationUpdated: ");

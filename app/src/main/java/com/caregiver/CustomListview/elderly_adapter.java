@@ -67,11 +67,7 @@ public class elderly_adapter extends BaseAdapter {
 
     @SuppressLint("SetTextI18n")
     @Override
-<<<<<<< HEAD
-    public View getView(int position, View convertView, ViewGroup parent) {
 
-        return null;
-=======
     public View getView(final int i, View view, ViewGroup viewGroup) {
         LayoutInflater mInflater =
                 (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -101,11 +97,8 @@ public class elderly_adapter extends BaseAdapter {
             }
         });
 
-
-
         
         return view;
->>>>>>> f7db4654288c5e377ccdf09b3b4bff1939aa1a42
     }
 
     private void downloadInLocalFile(final ImageView img, Elder elderDB) {
